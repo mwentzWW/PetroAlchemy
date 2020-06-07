@@ -47,6 +47,10 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# icon
+
+iconfinder_17_-Colour_-_Potion_Bottle_2730330.ico
+
 # cx_Freeze
 
 setup.py
