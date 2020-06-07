@@ -8,11 +8,10 @@ This desktop application was created using Python and Tkinter. Performing declin
 ## Current Features
 
     1. Import Excel/CSV production file
-    2. View and edit data in production tab (possibly remove)
-    3. Fit Arps hyperbolic decline curves for oil and gas
-    4. Run financial cash flow on decline curves
-    5. Preview monthly cash flow in application
-    6. Output cash flow to excel
+    2. Fit Arps hyperbolic decline curves for oil and gas
+    3. Run financial cash flow on decline curves
+    4. Preview monthly cash flow in application
+    5. Output cash flow to excel
 
 I have a list of features to add to the project. I want to add the ability for engineers to select several different kinds of decline curves, not just Arps hyperbolic/exponential. This application utilized the Society of Petroleum Evaluation Engineer's website and best practices for equations and discounting methodologies.
 
