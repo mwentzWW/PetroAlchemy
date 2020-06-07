@@ -13,7 +13,6 @@ from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 from matplotlib.ticker import StrMethodFormatter
-from pandastable import Table
 
 import eia_data.commodity_prices as prices
 import petrolpy_equations.petrolpy_equations as petrolpy
@@ -161,9 +160,6 @@ class Application(tk.Tk):
 
         home_page = HomePage(container, self)
         notebook.add(home_page, text="Home Page")
-
-        table_page = TablePage(container, self)
-        notebook.add(table_page, text="Production Table")
 
         plot_page = PlotPage(container, self)
         notebook.add(plot_page, text="Production Plot")
@@ -319,15 +315,6 @@ class HomePage(ttk.Frame):
 
         df_selected = self.controller.well_dataframes_dict.get(f"{dict_well_name}")
 
-        pt = self.controller.children["!frame"].children["!tablepage"].pt
-        pt = Table(
-            self.controller.children["!frame"].children["!tablepage"],
-            dataframe=df_selected,
-            showstatusbar=True,
-        )
-        pt.show()
-        pt.redrawVisible()
-
         plot_page = self.controller.children["!frame"].children["!plotpage"]
 
         # set plot widgets with oil early max
@@ -345,19 +332,6 @@ class HomePage(ttk.Frame):
         self.controller.children["!frame"].children["!plotpage"].reset_plot(init=True)
 
         plot_page.update_widgets()
-
-
-class TablePage(ttk.Frame):
-    """Frame to hold production table"""
-
-    def __init__(self, parent, controller):
-        ttk.Frame.__init__(self, parent)
-        self.controller = controller
-        self.grid(
-            row=0, column=0, sticky="NESW", rowspan=4, columnspan=4, padx=1, pady=1
-        )
-
-        self.pt = Table(self)
 
 
 class PlotPage(ttk.Frame):
