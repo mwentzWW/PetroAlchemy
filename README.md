@@ -15,7 +15,7 @@ This desktop application was created using Python and Tkinter. Performing declin
 
 I have a list of features to add to the project. I want to add the ability for engineers to select several different kinds of decline curves, not just Arps hyperbolic/exponential. This application utilized the Society of Petroleum Evaluation Engineer's website and best practices for equations and discounting methodologies.
 
-![Alpha Example](https://github.com/mwentzWW/PetroAlchemy/blob/master/docsimg//alpha_introduction.gif)
+![Alpha Example](https://github.com/mwentzWW/PetroAlchemy/blob/master/docs/img/alpha_introduction.gif)
 
 ## References
 
