@@ -8,7 +8,7 @@
   - [How to save financial cash flow output](#how-to-save-financial-cash-flow-output)
   - [Looking forward](#looking-forward)
 
-[PetroAlchemy Alpha Gif](https://github.com/mwentzWW/PetroAlchemy/blob/master/docs/img/alpha_introduction.gif)
+[PetroAlchemy Alpha Gif](./img/alpha_introduction.gif)
 
 ## What is PetroAlchemy?
 PetroAlchemy is a desktop application written using python and tkinter. Python is a very popular general purpose coding language. It is used to create websites, machine learning models, and data science tools. If you would like to learn more I would encourage you to go to [python.org](https://www.python.org/) and read the documentation. Tkinter is a standard library included with python used to create desktop applications, which means it is supported and packaged with python instead of a 3rd party. I used tkinter to simplify my code and reduce time to launch. Tkinter may not remain as the gui interface permanently. There are more advanced gui tools such as Qt, but at the moment I am not comfortable enough with the Qt API.
