@@ -5,7 +5,7 @@ The PetroAlchemy project is a child of my first attempt to create an open source
 
 The project is in the Alpha phase. I wanted to share it now before developing too much further so I can get feedback from fellow engineers on what features and design decisions they would like included. Please try it out and share your thoughts.
 
-[Alpha Release Turorial](https://petroalchemy.readthedocs.io/en/latest/alpha_tutorial.html)
+[Alpha Release Tutorial](https://petroalchemy.readthedocs.io/en/latest/alpha_tutorial.html)
 
 This desktop application was created using Python and Tkinter. Performing decline curve analysis and running cash flows is not computationally intensive unless you are running thousands of decline curves, which at that point the code would need to be optimized for speed. As this tool is starting with focus on analyzing a few wells at a time, Python is ideal for feature development and prototyping.
 
