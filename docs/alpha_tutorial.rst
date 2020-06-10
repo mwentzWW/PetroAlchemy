@@ -150,7 +150,7 @@ look back to the references previously provided.
 
 In the Alpha release the prices, operating expense (OPEX), and capital
 expense (CAPEX) are static and can not change by month. The prices and
-OPEX with be used for every month’s calculation of income. The CAPEX is
+OPEX will be used for every month’s calculation of income. The CAPEX is
 applied in the first month as one lump sum.
 
 The default oil and gas prices are the most recent spot prices for WTI
