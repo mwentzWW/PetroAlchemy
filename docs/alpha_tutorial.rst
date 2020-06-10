@@ -1,16 +1,6 @@
 PetroAlchemy Alpha Tutorial
 ===========================
-
--  `What is PetroAlchemy? <#what-is-petroalchemy>`__
--  `Use Case for PetroAlchemy <#use-case-for-petroalchemy>`__
--  `How to get PetroAlchemy <#how-to-get-petroalchemy>`__
--  `How to import data <#how-to-import-data>`__
--  `How to fit decline curves <#how-to-fit-decline-curves>`__
--  `How to run financials for a well using decline
-   curves <#how-to-run-financials-for-a-well-using-decline-curves>`__
--  `How to save financial cash flow
-   output <#how-to-save-financial-cash-flow-output>`__
--  `Looking forward <#looking-forward>`__
+.. contents::
 
 .. image:: img/alpha_introduction.gif
 
