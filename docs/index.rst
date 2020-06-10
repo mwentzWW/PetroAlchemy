@@ -6,6 +6,7 @@ Welcome to PetroAlchemy's documentation!
    :caption: Contents:
 
    alpha_tutorial
+   references
 
 
 

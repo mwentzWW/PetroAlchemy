@@ -1,4 +1,6 @@
 # PetroAlchemy
+[![Documentation Status](https://readthedocs.org/projects/petroalchemy/badge/?version=latest)](https://petroalchemy.readthedocs.io/en/latest/?badge=latest)
+
 The PetroAlchemy project is a child of my first attempt to create an open source project for petroleum engineering called petrolpy. The vision is to create an open source desktop application with useful tools for anyone interested in petroleum evaluation. As a reservoir engineer, I wanted to build tools I would actually use. Therefore, the project is beginning with decline curve analysis and estimating cash flows for wells or groups of wells.
 
 The project is in the Alpha phase. I wanted to share it now before developing too much further so I can get feedback from fellow engineers on what features and design decisions they would like included. Please try it out and share your thoughts.
