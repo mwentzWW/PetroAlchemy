@@ -25,4 +25,4 @@ I have a list of features to add to the project. I want to add the ability for e
 
 - [Petroleum Engineering Handbook (SPE) Valuation of Oil and Gas Reserves](https://petrowiki.org/PEH:Valuation_of_Oil_and_Gas_Reserves)
 - [Financials - SPEE Website](https://spee.org/resources/recommended-evaluation-practices-reps)
-- [AAPG Reserves Estimation](https://wiki.aapg.org/Reserves_estimation)
+- [Fekete Decline Theory](http://www.fekete.com/san/webhelp/feketeharmony/harmony_webhelp/content/html_files/reference_material/Analysis_Method_Theory/Traditional_Decline_Theory.htm)
