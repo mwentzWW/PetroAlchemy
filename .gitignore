@@ -12,15 +12,16 @@ __pycache__/
 
 # EIA data scripts
 
-/eia_data
+eia_api_key.json
 
 # Application data
 
 /icons
 
-# outputs for testing
+# outputs for testing/random files
 
 /output_trash
+desktop.ini
 
 # Sqlite3 example work
 

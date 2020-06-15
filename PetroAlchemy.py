@@ -890,8 +890,15 @@ class CashflowInputPage(ttk.Frame):
         # Right side columns 2 and 3
 
         # Get current futures prices for Nymex WTI and Natural Gas
+        try:
 
-        wti, nat_gas = prices.futures_prices()
+            wti, nat_gas = prices.futures_prices()
+
+        except:
+
+            "Exception occurs if API key is blank or request error"
+
+            wti, nat_gas = 50, 2.50
 
         label_right_1 = ttk.Label(self, text="Enter Oil Price ($/BBL)")
         label_right_1.grid(row=0, column=2, padx=20, pady=10)
