@@ -1206,16 +1206,23 @@ class CashflowInputPage(ttk.Frame):
 
         # Payout
 
-        payout_years = round(
-            float(
-                (
-                    df_cashflow[df_cashflow["Cumulative Net Revenue (M$)"] > 0].index[0]
-                    + 1
-                )
-                / 12
-            ),
-            1,
-        )
+        try:
+            payout_years = round(
+                float(
+                    (
+                        df_cashflow[
+                            df_cashflow["Cumulative Net Revenue (M$)"] > 0
+                        ].index[0]
+                        + 1
+                    )
+                    / 12
+                ),
+                1,
+            )
+
+        except IndexError:
+            # Error ocurrs when Cumulative Net Revenue is never positive
+            payout_years = "Infinite"
 
         # 1 year EUR, 50 (600 months) year EUR, 5 (60 months) year EUR
 
