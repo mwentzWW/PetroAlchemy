@@ -760,6 +760,7 @@ class PlotPage(ttk.Frame):
         datemin = datetime.date(df_selected["date"].min().year, 1, 1)
         datemax = datetime.date(df_selected["date"].max().year + 1, 1, 1)
         ax.set_xlim(datemin, datemax)
+        ax.set_ylim(ymin=10)
 
         fig.subplots_adjust(left=0.05, right=0.95, top=0.90, bottom=0.15)
 
