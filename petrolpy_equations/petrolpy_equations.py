@@ -1,34 +1,48 @@
 import math
 
 
-def convert_secant_di_to_nominal(secant_di, b_factor):
+def convert_secant_di_to_nominal(secant_di: float, b_factor: float) -> float:
     """ Converts secant decline rate which most people assume 
         for decline rates to nominal for decline curve equations
         
-"""
+    """
 
-    nominal_di = (((1 - secant_di) ** (-b_factor)) - 1) / b_factor
+    if b_factor == 0:
+        # Exponential
+
+        nominal_di = secant_di
+
+    else:
+
+        nominal_di = (((1 - secant_di) ** (-b_factor)) - 1) / b_factor
 
     return nominal_di
 
 
-def hyp_decline_rate_q(qi, b_factor, nominal_di, delta_time):
+def arps_decline_rate_q(
+    qi: float, b_factor: float, nominal_di: float, delta_time: float
+) -> float:
     """Returns production rate at time t for hyperbolic decline"""
 
-    q_delta_time = qi / ((1 + b_factor * nominal_di * delta_time) ** (1 / b_factor))
+    if b_factor == 0:
+        # Arps Exponential
+
+        q_delta_time = qi * math.exp(-(nominal_di * delta_time))
+
+    elif b_factor == 1.0:
+        # Arps Harmonic
+
+        q_delta_time = qi / (1 + nominal_di * delta_time)
+
+    else:
+        # Arps Hyperbolic
+
+        q_delta_time = qi / ((1 + b_factor * nominal_di * delta_time) ** (1 / b_factor))
 
     return q_delta_time
 
 
-def exp_decline_rate_q(qi, nominal_di, delta_time):
-    """Returns production rate at time t for exponential decline"""
-
-    q_delta_time = qi * math.exp(-(nominal_di * delta_time))
-
-    return q_delta_time
-
-
-def ann_to_monthly_disc_rate(annual_disc_rate):
+def ann_to_monthly_disc_rate(annual_disc_rate: float) -> float:
     """ Given discount rate returns effective monthly discount rate
 
         Example: convert 10% annual, ann_to_monthly_disc_rate(0.10)
