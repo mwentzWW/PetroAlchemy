@@ -54,6 +54,7 @@ iconfinder_17_-Colour_-_Potion_Bottle_2730330.ico
 # cx_Freeze
 
 setup.py
+dist/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
