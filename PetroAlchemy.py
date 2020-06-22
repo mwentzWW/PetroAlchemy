@@ -40,7 +40,7 @@ class Application(tk.Tk):
         tk.Tk.__init__(self)
 
         tk.Tk.iconbitmap(
-            self, default=r"iconfinder_17_-Colour_-_Potion_Bottle_2730330.ico",
+            self, default=r"icon\\app_colored_bottle.ico",
         )
         tk.Tk.wm_title(self, "PetroAlchemy - Petrolpy Application")
 
