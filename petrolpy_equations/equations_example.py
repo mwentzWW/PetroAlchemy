@@ -14,7 +14,7 @@ qi = float(2700)
 nominal_di = petrolpy.convert_secant_di_to_nominal(di_secant, b_factor)
 
 df["curve"] = [
-    petrolpy.hyp_decline_rate_q(qi, b_factor, nominal_di, delta_time)
+    petrolpy.arps_decline_rate_q(qi, b_factor, nominal_di, delta_time)
     for delta_time in df["delta_time_yrs"]
 ]
 
