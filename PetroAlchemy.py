@@ -610,10 +610,9 @@ class PlotPage(ttk.Frame):
 
         nominal_di = petrolpy.convert_secant_di_to_nominal(di_secant, b_factor)
 
-        df_curve[curve_name] = [
-            petrolpy.arps_decline_rate_q(qi, b_factor, nominal_di, delta_time)
-            for delta_time in delta_time_yrs
-        ]
+        df_curve[curve_name] = petrolpy.arps_decline_rate_q(
+            qi, b_factor, nominal_di, delta_time_yrs
+        )
 
         self.delete_curve(curve_name)
         self.controller.decline_curves_dict[curve_name] = df_curve

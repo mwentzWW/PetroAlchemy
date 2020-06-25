@@ -1,4 +1,6 @@
 import math
+import numpy as np
+from typing import List
 
 
 def convert_secant_di_to_nominal(secant_di: float, b_factor: float) -> float:
@@ -20,26 +22,55 @@ def convert_secant_di_to_nominal(secant_di: float, b_factor: float) -> float:
 
 
 def arps_decline_rate_q(
-    qi: float, b_factor: float, nominal_di: float, delta_time: float
-) -> float:
-    """Returns production rate at time t for hyperbolic decline"""
+    qi: float,
+    b_factor: float,
+    nominal_di: float,
+    delta_time: List[float],
+    min_decline: float = 0.06,
+) -> List[float]:
+    """Returns list of production rates at time t for hyperbolic decline"""
 
-    if b_factor == 0:
-        # Arps Exponential
+    decline = nominal_di
 
-        q_delta_time = qi * math.exp(-(nominal_di * delta_time))
+    time = np.array(delta_time)
 
-    elif b_factor == 1.0:
-        # Arps Harmonic
+    q_rates = []
 
-        q_delta_time = qi / (1 + nominal_di * delta_time)
+    time_switch_exp = None
 
-    else:
-        # Arps Hyperbolic
+    for t in time:
 
-        q_delta_time = qi / ((1 + b_factor * nominal_di * delta_time) ** (1 / b_factor))
+        time_dt = decline / (1 + b_factor * nominal_di * t)
 
-    return q_delta_time
+        if time_dt < min_decline:
+            # Arps Exponential at minimum decline
+
+            if time_switch_exp is None:
+                time_switch_exp = t
+                qi_exp = q_rates[-1]
+
+            t = t - time_switch_exp
+
+            q_delta_time = qi_exp * math.exp(-(min_decline * t))
+
+        elif b_factor == 0:
+            # Arps Exponential
+
+            q_delta_time = qi * math.exp(-(decline * t))
+
+        elif b_factor == 1.0:
+            # Arps Harmonic
+
+            q_delta_time = qi / (1 + decline * t)
+
+        else:
+            # Arps Hyperbolic
+
+            q_delta_time = qi / ((1 + b_factor * decline * t) ** (1 / b_factor))
+
+        q_rates.append(q_delta_time)
+
+    return q_rates
 
 
 def ann_to_monthly_disc_rate(annual_disc_rate: float) -> float:
