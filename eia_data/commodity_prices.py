@@ -57,7 +57,7 @@ def futures_prices():
     json_response_wti = requests.get(wti_futures_link)
     wti_json_loaded = json.loads(json_response_wti.text)
 
-    time.sleep(2)
+    time.sleep(0.25)
 
     json_response_nat_gas = requests.get(nat_gas_future_link)
     nat_gas_json_loaded = json.loads(json_response_nat_gas.text)
