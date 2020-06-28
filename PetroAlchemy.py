@@ -1,5 +1,6 @@
 import datetime
 import functools
+import json
 import tkinter as tk
 from datetime import timedelta
 from pathlib import Path
@@ -16,6 +17,16 @@ from matplotlib.ticker import StrMethodFormatter
 
 import eia_data.commodity_prices as prices
 import petrolpy_equations.petrolpy_equations as petrolpy
+
+json_dark = open(r"themes\\dark_vscode.json", "r")
+json_dark_data = json.loads(json_dark.read())
+json_dark.close()
+json_light = open(r"themes\\light_vscode.json", "r")
+json_light_data = json.loads(json_light.read())
+json_light.close()
+
+DARK_THEME = json_dark_data.get("settings")
+LIGHT_THEME = json_light_data.get("settings")
 
 mpl.use("TkAgg")
 LARGE_FONT = ("Verdana", 16)
@@ -46,41 +57,17 @@ class Application(tk.Tk):
 
         self.main_style = ttk.Style()
         self.main_style.theme_create(
-            "dark",
-            parent="clam",
-            settings={
-                "TNotebook": {
-                    "configure": {"background": black_25, "foreground": "white"}
-                },
-                "TNotebook.Tab": {
-                    "configure": {"background": black_25, "foreground": blue_70}
-                },
-                "TFrame": {
-                    "configure": {"background": black_25, "foreground": "white"}
-                },
-                "TLabelframe": {"configure": {"background": black_30}},
-                "TButton": {
-                    "configure": {"background": blue_70, "foreground": "white"}
-                },
-                "TLabel": {
-                    "configure": {"background": black_25, "foreground": "white"}
-                },
-                "TCombobox": {
-                    "configure": {"background": blue_70, "foreground": "white"}
-                },
-            },
+            "dark", parent="clam", settings=DARK_THEME,
+        )
+        self.main_style.theme_create(
+            "light", parent="clam", settings=LIGHT_THEME,
         )
 
         self.main_style.theme_use("clam")
         themes = (
-            "dark",
-            "winnative",
-            "clam",
-            "alt",
             "default",
-            "classic",
-            "vista",
-            "xpnative",
+            "dark",
+            "light",
         )
 
         self.plot_style = "bmh"
@@ -108,6 +95,7 @@ class Application(tk.Tk):
         self.curve_qi = tk.DoubleVar()
         self.curve_di_secant = tk.DoubleVar()
         self.curve_b_factor = tk.DoubleVar()
+        self.curve_min_decline = tk.DoubleVar()
         self.curve_name = tk.StringVar()
 
         # Edit menubar for Application
@@ -252,6 +240,9 @@ class Application(tk.Tk):
 
     def update_theme(self, theme):
         """Sets application theme/style"""
+        if theme == "default":
+            theme = "clam"
+
         self.main_style.theme_use(theme)
 
     def update_plot_style(self, style):
@@ -444,10 +435,25 @@ class PlotPage(ttk.Frame):
         self.spinbox_b_factor.set(1.1)
         self.spinbox_b_factor.pack()
 
+        lable_7 = ttk.Label(frame_widgets, text="Min. Decline (effective %), 1/yr")
+        lable_7.pack()
+
+        self.spinbox_min_decline = ttk.Spinbox(
+            frame_widgets,
+            width=5,
+            justify=tk.CENTER,
+            from_=0,
+            to=25,
+            increment=1,
+            textvariable=controller.curve_min_decline,
+        )
+        self.spinbox_min_decline.set(6.0)
+        self.spinbox_min_decline.pack()
+
         # Select Curves and modify them
 
-        lable_7 = ttk.Label(frame_widgets, text="Enter/Select Curve Name")
-        lable_7.pack(pady=5)
+        lable_8 = ttk.Label(frame_widgets, text="Enter/Select Curve Name")
+        lable_8.pack(pady=5)
 
         self.combobox_curve_selected = ttk.Combobox(
             frame_widgets, justify=tk.CENTER, textvariable=self.curve_selected,
@@ -588,6 +594,7 @@ class PlotPage(ttk.Frame):
 
         di_secant = float(self.controller.curve_di_secant.get() / 100)
         b_factor = float(self.controller.curve_b_factor.get())
+        min_decline = float(self.controller.curve_min_decline.get() / 100)
         qi = float(self.controller.curve_qi.get())
         curve_name = str(self.curve_selected.get())
 
@@ -611,7 +618,7 @@ class PlotPage(ttk.Frame):
         nominal_di = petrolpy.convert_secant_di_to_nominal(di_secant, b_factor)
 
         df_curve[curve_name] = petrolpy.arps_decline_rate_q(
-            qi, b_factor, nominal_di, delta_time_yrs
+            qi, b_factor, nominal_di, delta_time_yrs, min_decline
         )
 
         self.delete_curve(curve_name)
