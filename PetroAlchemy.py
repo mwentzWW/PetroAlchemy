@@ -189,31 +189,39 @@ class Application(tk.Tk):
 
                 df.date = [time.date() for time in df.date]
 
-                well_name = str(df["well name"][1])
+                well_names = df["well name"].unique().tolist()
 
-                if well_name not in self.well_list:
+                num_wells = len(well_names)
 
-                    self.well_list.append(well_name)
+                for well_name in well_names:
 
-                    dict_well_name = well_name.replace(" ", "_")
-                    self.well_dataframes_dict[dict_well_name] = df
+                    well_name = str(well_name)
 
-                    if len(fnames) == 1:
+                    if well_name not in self.well_list:
 
+                        self.well_list.append(well_name)
+
+                        dict_well_name = well_name.replace(" ", "_")
+                        self.well_dataframes_dict[dict_well_name] = df.loc[
+                            df["well name"] == well_name
+                        ]
+
+                        if num_wells == 1:
+
+                            messagebox.showinfo(
+                                "Import Finished", f"{well_name} has been added"
+                            )
+
+                    else:
                         messagebox.showinfo(
-                            "Import Finished", f"{well_name} has been added"
+                            "Import Failed",
+                            f"{well_name} already exists, check the file and try again",
                         )
 
-                else:
-                    messagebox.showinfo(
-                        "Import Failed",
-                        f"{well_name} already exists, check the well file and try again",
-                    )
-
-            if len(fnames) > 1:
+            if num_wells > 1:
 
                 messagebox.showinfo(
-                    "Import Finished", f"{len(fnames)} wells have been added"
+                    "Import Finished", f"{num_wells} wells have been added"
                 )
 
         except:
@@ -226,7 +234,7 @@ class Application(tk.Tk):
             "state"
         ] = "normal"
         self.children["!frame"].children["!homepage"].combobox_well_select.set(
-            well_name
+            well_names[0]
         )
         self.children["!frame"].children["!plotpage"].combobox_curve_start_date.set(
             df["date"][0]
@@ -443,7 +451,7 @@ class PlotPage(ttk.Frame):
             width=5,
             justify=tk.CENTER,
             from_=0,
-            to=25,
+            to=100,
             increment=1,
             textvariable=controller.curve_min_decline,
         )
