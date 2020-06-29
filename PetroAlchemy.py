@@ -2,6 +2,7 @@ import datetime
 import functools
 import json
 import tkinter as tk
+import webbrowser
 from datetime import timedelta
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
@@ -117,6 +118,9 @@ class Application(tk.Tk):
         menu_theme = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Theme", menu=menu_theme)
 
+        menubar.add_command(label="Help", command=lambda: self.help_docs())
+        menubar.add_command(label="Give Feedback", command=lambda: self.feedback_link())
+
         """ menu_plot_style = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Plot Style", menu=menu_plot_style) """
 
@@ -142,6 +146,7 @@ class Application(tk.Tk):
         notebook.grid(
             row=0, column=0, sticky="NESW", rowspan=4, columnspan=4, padx=1, pady=1
         )
+        notebook.enable_traversal()
 
         # Add tabs to notebook
 
@@ -167,6 +172,16 @@ class Application(tk.Tk):
             foreground="white",
         )
         label_status_bar.grid(row=4, column=0, sticky="SWE", rowspan=1, columnspan=4)
+
+    def help_docs(self):
+        """Open read the docs website"""
+
+        webbrowser.open("https://petroalchemy.readthedocs.io/en/latest/?badge=latest")
+
+    def feedback_link(self):
+        """Open survey link"""
+
+        webbrowser.open("https://www.surveymonkey.com/r/F22RYZ5")
 
     def import_data(self):
         """Select file to import into dataframe"""
@@ -268,7 +283,7 @@ class HomePage(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.controller = controller
 
-        welcome_text = "Welcome, you need to import well data to get started. \nUse at your own discretion.\nThis application is open source to provide useful software to engineers, but is not a replacement for business critical reserve software."
+        welcome_text = "Welcome, you need to import well data to get started. \n\nUse at your own discretion.\n\nThis application is open source to provide useful software to engineers, \nbut is not a replacement for business critical reserve software."
 
         label_welcome = ttk.Label(self, text=welcome_text, font=LARGE_FONT,)
         label_welcome.grid(column=1, row=1, columnspan=4, rowspan=1, pady=10, padx=10)
