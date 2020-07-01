@@ -330,6 +330,8 @@ class HomePage(ttk.Frame):
 
         plot_page = self.controller.children["!frame"].children["!plotpage"]
 
+        plot_page.combobox_curve_selected.set(f"{well_name} Oil Curve")
+
         # set plot widgets with oil early max
 
         plot_page.spinbox_qi.set(df_selected.oil[:6].max())
@@ -557,6 +559,7 @@ class PlotPage(ttk.Frame):
 
         curve_name = self.combobox_curve_selected.get()
         self.curve_selected.set(curve_name)
+        self.combobox_curve_selected.set(curve_name)
 
         self.controller.children["!frame"].children[
             "!cashflowinputpage"
@@ -565,6 +568,13 @@ class PlotPage(ttk.Frame):
             "!cashflowinputpage"
         ].combobox_gas_curve["values"] = self.controller.gas_curves
 
+        if curve_name in self.controller.oil_curves:
+            self.combobox_phase.set("Oil")
+        else:
+            self.combobox_phase.set("Gas")
+
+        self.update_phase_widgets(init=False)
+
     def update_axis_units(self, event=None):
         """Callback to add units label to axis"""
 
@@ -572,7 +582,7 @@ class PlotPage(ttk.Frame):
         self.ax.set_ylabel(units)
         self.canvas.draw()
 
-    def update_phase_widgets(self, event=None):
+    def update_phase_widgets(self, event=None, init=True):
         """Callback to update max rate and di for phase"""
 
         well_name = (
@@ -584,9 +594,12 @@ class PlotPage(ttk.Frame):
 
         df_selected = self.controller.well_dataframes_dict.get(f"{dict_well_name}")
 
-        self.combobox_curve_selected.set(f"{self.combobox_phase.get()} Curve Name")
+        curve_phase = self.combobox_phase.get()
 
-        curve_phase = self.combobox_phase.get().lower()
+        if init:
+            self.combobox_curve_selected.set(f"{well_name} {curve_phase} Curve")
+
+        curve_phase = curve_phase.lower()
 
         self.spinbox_qi.set(df_selected[curve_phase][:6].max())
         max_id = df_selected[curve_phase][:6].idxmax()
@@ -608,6 +621,8 @@ class PlotPage(ttk.Frame):
         )
 
         months = pd.date_range(curve_start_date, periods=600, freq="M")
+
+        # create days date range because months sets inital date to end of month
 
         delta_time_yrs = [(date - curve_start_date).days / 365 for date in months]
 
@@ -718,10 +733,15 @@ class PlotPage(ttk.Frame):
 
         if curve_name in self.controller.decline_curves_dict:
             del self.controller.decline_curves_dict[curve_name]
+            well_name = (
+                self.controller.children["!frame"]
+                .children["!homepage"]
+                .combobox_well_select.get()
+            )
             curve_phase = self.combobox_phase.get()
-            self.combobox_curve_selected.set(f"{curve_phase} Curve Name")
+            self.combobox_curve_selected.set(f"{well_name} {curve_phase} Curve")
             self.update_combobox_curve_select()
-            self.reset_plot()
+            # self.reset_plot()
 
     def reset_plot(self, init=False):
 
