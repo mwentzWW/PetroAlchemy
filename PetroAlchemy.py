@@ -1,6 +1,7 @@
 import datetime
 import functools
 import json
+import os
 import tkinter as tk
 import webbrowser
 from datetime import timedelta
@@ -187,7 +188,7 @@ class Application(tk.Tk):
         """Select file to import into dataframe"""
 
         try:
-            fnames = filedialog.askopenfilenames()
+            fnames = filedialog.askopenfilenames(initialdir=os.getcwd())
 
             for fname in fnames:
                 file_type = Path(fname).suffix
