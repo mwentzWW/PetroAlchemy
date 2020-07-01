@@ -93,7 +93,7 @@ class Application(tk.Tk):
 
         self.curve_phase = tk.StringVar()
         self.curve_start_date = tk.StringVar()
-        self.curve_qi = tk.DoubleVar()
+        self.curve_qi = tk.IntVar()
         self.curve_di_secant = tk.DoubleVar()
         self.curve_b_factor = tk.DoubleVar()
         self.curve_min_decline = tk.DoubleVar()
@@ -334,7 +334,7 @@ class HomePage(ttk.Frame):
 
         # set plot widgets with oil early max
 
-        plot_page.spinbox_qi.set(df_selected.oil[:6].max())
+        plot_page.spinbox_qi.set(int(df_selected.oil[:6].max()))
         max_id = df_selected.oil[:6].idxmax()
         di_estimate_float = (
             df_selected["oil"][max_id] - df_selected["oil"][max_id + 12]
@@ -420,7 +420,7 @@ class PlotPage(ttk.Frame):
 
         self.spinbox_qi = ttk.Spinbox(
             frame_widgets,
-            width=7,
+            width=10,
             justify=tk.CENTER,
             from_=0,
             to=1_000_000,
@@ -633,7 +633,7 @@ class PlotPage(ttk.Frame):
         di_secant = float(self.controller.curve_di_secant.get() / 100)
         b_factor = float(self.controller.curve_b_factor.get())
         min_decline = float(self.controller.curve_min_decline.get() / 100)
-        qi = float(self.controller.curve_qi.get())
+        qi = int(self.controller.curve_qi.get())
         curve_name = str(self.curve_selected.get())
 
         curve_phase = self.combobox_phase.get()
