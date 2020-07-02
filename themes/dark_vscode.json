@@ -1,0 +1,53 @@
+{
+    "name": "Dark",
+    "settings": {
+        "TNotebook": {
+            "configure": {
+                "background": "#1E1E1E",
+                "foreground": "#D4D4D4"
+            }
+        },
+        "TNotebook.Tab": {
+            "configure": {
+                "background": "#1E1E1E",
+                "foreground": "#D4D4D4"
+            }
+        },
+        "TFrame": {
+            "configure": {
+                "background": "#1E1E1E",
+                "foreground": "#D4D4D4"
+            }
+        },
+        "TLabelframe": {
+            "configure": {
+                "background": "#0000",
+                "foreground": "#D4D4D4"
+            }
+        },
+        "TButton": {
+            "configure": {
+                "background": "#1E1E1E",
+                "foreground": "#D4D4D4"
+            }
+        },
+        "TLabel": {
+            "configure": {
+                "background": "#1E1E1E",
+                "foreground": "#D4D4D4"
+            }
+        },
+        "TCombobox": {
+            "configure": {
+                "background": "#1E1E1E",
+                "foreground": "#D4D4D4"
+            }
+        },
+        "TSpinbox": {
+            "configure": {
+                "background": "#1E1E1E",
+                "foreground": "#D4D4D4"
+            }
+        }
+    }
+}

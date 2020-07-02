@@ -1,0 +1,25 @@
+{
+    "name": "Light",
+    "settings": {
+        ".": {
+            "configure": {
+                "background": "#FFFFFF",
+                "foreground": "#000000"
+            }
+        },
+        "TButton": {
+            "configure": {
+                "highlightbackground": "blue",
+                "highlightcolor": "blue",
+                "borderwidth": 5,
+                "relief": "raised"
+            }
+        },
+        "TLabelframe": {
+            "configure": {
+                "background": "#6F6F6F",
+                "foreground": "#000000"
+            }
+        }
+    }
+}
