@@ -8,7 +8,7 @@ if sys.platform == "win32":
 
 icon = r"icon\\app_colored_bottle.ico"
 
-version = "0.1.1"
+version = "0.2.0"
 
 executables = [Executable("PetroAlchemy.py", base=base, icon=icon,)]
 
@@ -44,10 +44,10 @@ os.environ["TK_LIBRARY"] = os.path.join(PYTHON_INSTALL_DIR, "tcl", "tk8.6")
 include_files = [
     os.path.join(PYTHON_INSTALL_DIR, "DLLs", "tk86t.dll"),
     os.path.join(PYTHON_INSTALL_DIR, "DLLs", "tcl86t.dll"),
-    icon,
+    r"icon",
     r"data_example",
     r"app_settings.json",
-    r"icon",
+    r"themes",
 ]
 
 setup(

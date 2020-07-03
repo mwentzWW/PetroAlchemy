@@ -56,14 +56,14 @@ How to get PetroAlchemy
 
 The first release of the package is available in Alpha phase. The
 easiest way to get the software if you are using a Windows 64-bit
-machine is to download the Windows installer from the `Alpha
-Release <https://github.com/mwentzWW/PetroAlchemy/releases>`__ page. If
+machine is to download the Windows installer from the `README 
+<https://github.com/mwentzWW/PetroAlchemy>`__ installation section. If
 you do not know if you are running 32-bit or 64-bit then type *about
 your pc* in the Windows search bar and it should list it under **System
 type**.
 
 The Windows installer will ask you where to store the application and
-the associated files. Once the installer is finished you should be able
+the associated files. Once the installer is finished there will be a *PetroAlchemy* shortcut on your desktop. You should also be able
 to search for PetroAlchemy or find the PetroAlchemy.exe file wherever
 you saved it and run the application.
 
@@ -74,13 +74,7 @@ with that I would appreciate the input.
 
 The alternative from using a Windows or Linux installer would be to
 clone the github repository and run the python code yourself if you
-already are comfortable with doing that. Taking this approach will hit a
-roadblock in that a small feature of the application uses my EIA data
-API key and module to pull the most recent EIA spot prices for WTI and
-NYMEX Gas. I plan on fixing this API secret issue soon, but in the
-meantime if you are cloning the repo I can send you the EIA module where
-you can use your own API key or you can just remove the EIA module from
-the python code.
+already are comfortable with doing that.
 
 How to import data
 ------------------
@@ -93,9 +87,9 @@ Currently the production file **must** use the below column format:
 
 .. image:: img/data_import_example.png
 
-The column names must be “Well Name”, “Date”, “Oil”, and “Gas”. If your
+The column names must be *Well Name*, *Date*, *Oil*, and *Gas*. If your
 data is not set up this way you will have an import error in the
-application.
+application. You can import multiple wells at once if your file has more than one well in the *Well Name* column of your import file.
 
 Once the application is running you can import your data by clicking the
 **Import Well Data** button on the home page, or by clicking File >
@@ -106,14 +100,14 @@ on the home page.
 How to fit decline curves
 -------------------------
 
+You can select which well to analyze by using the dropdown box on the home page. The current well selected will appear in the status bar in blue at the bottom of the screen. You can also go to the next well by pressing **ctrl+j**, and go to the previous well by pressing **ctrl+f**.
+
 The selected well’s production will be shown on the **Production Plot**
 tab. Click the tab to view the data you just imported. On the left side
-of the screen you will see all of the decline curve parameters for Arps
-Hyperbolic Decline. This tool is only useful if you have a reasonable
+of the screen you will see all of the decline curve parameters for Arps Decline. PetroAlchemy will use either an exponential, hyperbolic, or harmonic decline depending on what *B Factor* is selected. PetroAlchemy will automatically switch to exponential terminal decline based on the *minimim decline* selected. This tool is only useful if you have a reasonable
 understanding of how decline curves are constructed. For a refresher on
 decline curves and the equations used in PetroAlchemy refer to the
-*References* section of the
-`README <https://github.com/mwentzWW/PetroAlchemy>`__ on github.
+`References <https://petroalchemy.readthedocs.io/en/latest/references.html>`__.
 
 PetroAlchemy models one decline curve or forecast at a time. First
 select the phase to model (Oil or Gas), the Date you want the forecast
@@ -127,13 +121,14 @@ Once your parameters have been filled in for a first look type in a
 special name for the curve linked to the phase you have selected. It
 will save the curve with the default name if you do not provide one.
 Select *Create/Update Decline Curve* to save the curve model based on
-the parameters and show it on the plot. Once a curve is created you can
-select it from the *Enter/Select Curve Name* dropdown to either remove
-it from the plot (but not delete it), plot it to the screen if not
-already shown, or delete the curve from the application. If you want to
-modify a curve you have already made instead of making a new curve every
-time you change the parameters, then select the curve name from the
-dropdown box, modify any parameters, and select *Create/Update Decline
+the parameters and show it on the plot. Once a curve exists you have four options represented as buttons:
+
+#. **Create/Update Decline Curve:** if a curve already exists and is selected in the **Enter/Select Curve Name** box, this button will update the curve parameters and plot it to the graph
+#. **Remove Decline Curves:** removes the decline curves from the plot, but **does not** delete them. This button is to clear the plot if too many curves are plotted.
+#. **Plot Selected Curve:** this will add the selected curve in the **Enter/Select Curve Name** box to the plot.
+#. **Delete Selected Curve:** this will **delete** the selected curve in the **Enter/Select Curve Name** box from the application.
+
+If you want to modify a curve you have already made instead of making a new curve every time you change the parameters, then select the curve name from the dropdown box, modify any parameters, and select *Create/Update Decline
 Curve* again to update the named curve.
 
 .. image:: img/forecast_plot_example.png
@@ -141,23 +136,17 @@ Curve* again to update the named curve.
 How to run financials for a well using decline curves
 -----------------------------------------------------
 
-Once a curve has been saved for an oil and gas phase a cashflow using
+Once a curve has been saved for an oil and gas phase, a cashflow using
 the forecasts can be created. Select the *Cashflow Inputs* tab to see
 the economic input options. Any curve saved can be selected to be used
 for the cashflow using the dropdowns. The key inputs for any petroleum
 evaluation cash flow can be entered. If any of the terms are unfamiliar
 look back to the references previously provided.
 
-In the Alpha release the prices, operating expense (OPEX), and capital
+In this Alpha release the prices, operating expense (OPEX), and capital
 expense (CAPEX) are static and can not change by month. The prices and
 OPEX will be used for every month’s calculation of income. The CAPEX is
 applied in the first month as one lump sum.
-
-The default oil and gas prices are the most recent spot prices for WTI
-and NYMEX gas from EIA, which typically lag about 5 days from current.
-This is handy to use at current market spot prices for scenarios, but
-more advanced pricing features are planned for future releases to
-include strip prices and the ability to import your own prices by month.
 
 Once you have changed the Cashflow Input parameters however you like,
 select the **Run Financials** button on the bottom right. The Cashflow
@@ -178,6 +167,11 @@ How to save financial cash flow output
 You can save the entire cashflow output run to excel by selecting **File
 > Save Cashflow**. Once exported to excel it is easy to use a pivot
 table to change or alter the data in how you would like to see it.
+
+How to get EIA front month futures prices
+-----------------------------------------
+
+If you want PetroAlchemy to automatically use the WTI and Natural Gas futures front month contract prices, then you need to get a free API key from eia.gov `here <https://www.eia.gov/opendata/register.php/>`__. Once you register and receive an API key from eia.gov, find your **app_settings.json** file which should be in your **PetroAlchemy** folder you installed the program in. Open the json file and replace **EIA_API_KEY** with your API key eia.gov emailed you. Make sure your api key is surrounded by quotes in the json file. Now PetroAlchemy will pull the front month prices and place them as the oil and gas prices on the **Cashflow Input** tab.
 
 Looking forward
 ---------------
