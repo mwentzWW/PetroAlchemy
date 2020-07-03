@@ -662,7 +662,7 @@ class PlotPage(ttk.Frame):
 
         # create days date range because months sets inital date to end of month
 
-        delta_time_yrs = [(date - curve_start_date).days / 365 for date in months]
+        delta_time_yrs = [(date - months[0]).days / 365 for date in months]
 
         df_curve = pd.DataFrame(
             zip(months, delta_time_yrs), columns=["months", "delta_time_yrs"]
