@@ -174,6 +174,43 @@ class Application(tk.Tk):
         )
         label_status_bar.grid(row=4, column=0, sticky="SWE", rowspan=1, columnspan=4)
 
+        # Add keyboard shortcuts to go to previous or next well in list
+
+        self.bind("<Control-f>", self.prev_well)
+        self.bind("<Control-j>", self.next_well)
+
+    def prev_well(self, event):
+        """Change current well to previous well in list"""
+
+        current_well = (
+            self.children["!frame"].children["!homepage"].combobox_well_select.get()
+        )
+        current_index = self.well_list.index(current_well)
+
+        prev_well = self.well_list[current_index - 1]
+        self.children["!frame"].children["!homepage"].combobox_well_select.set(
+            prev_well
+        )
+        self.children["!frame"].children[
+            "!homepage"
+        ].combobox_well_select.event_generate("<<ComboboxSelected>>")
+
+    def next_well(self, event):
+        """Change current well to next well in list"""
+
+        current_well = (
+            self.children["!frame"].children["!homepage"].combobox_well_select.get()
+        )
+        current_index = self.well_list.index(current_well)
+
+        next_well = self.well_list[current_index + 1]
+        self.children["!frame"].children["!homepage"].combobox_well_select.set(
+            next_well
+        )
+        self.children["!frame"].children[
+            "!homepage"
+        ].combobox_well_select.event_generate("<<ComboboxSelected>>")
+
     def help_docs(self):
         """Open read the docs website"""
 
