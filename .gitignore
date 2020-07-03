@@ -15,7 +15,7 @@ __pycache__/
 
 eia_api_key.json
 
-# Application data
+# Extra Icons
 
 /icons
 
@@ -47,10 +47,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
-# icon
-
-iconfinder_17_-Colour_-_Potion_Bottle_2730330.ico
 
 # cx_Freeze
 
