@@ -11,7 +11,19 @@ __pycache__/
 /.vscode
 /.vs
 
-# EIA data scripts
+# cx_freeze notes etc.
+
+Notes.md
+
+# Qt files
+
+main.pyproject
+main.pyproject.user
+mainwindow.ui 
+testing_models.py
+convert_ui_to_python.bat
+
+# EIA data
 
 eia_api_key.json
 
