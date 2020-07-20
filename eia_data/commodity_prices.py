@@ -6,7 +6,7 @@ import os
 # Source spot prices from EIA.gov
 # Get EIA_API_KEY here https://www.eia.gov/opendata/register.php
 
-json_file = open(r"app_settings.json", "r")
+json_file = open(r"settings/user_settings.json", "r")
 json_data = json.loads(json_file.read())
 json_file.close()
 
