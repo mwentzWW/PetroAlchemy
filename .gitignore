@@ -19,7 +19,8 @@ Notes.md
 
 main.pyproject
 main.pyproject.user
-mainwindow.ui 
+mainwindow.ui
+mainwindow.ui.autosave
 testing_models.py
 convert_ui_to_python.bat
 
