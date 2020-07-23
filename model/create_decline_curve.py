@@ -23,15 +23,24 @@ def create_decline_curve(parent, curve_name=None):
 
     curve_start_date = parent.ui.dateEditCurveStart.date().toPython()
 
-    months = pd.date_range(curve_start_date, periods=600, freq="M")
+    # Calculated time for 50 years
 
-    # create days date range because months sets inital date to end of month
+    unit_time = parent.ui.comboBoxUnits.currentText()
 
-    delta_time_yrs = [(date - months[0]).days / 365 for date in months]
+    if unit_time == "BOPM/MCFPM":
+        unit_time_factor = 1
+        freq = "M"
+    else:
+        unit_time_factor = 12
+        freq = "D"
 
-    df_curve = pd.DataFrame(
-        zip(months, delta_time_yrs), columns=["months", "delta_time_yrs"]
-    )
+    time = pd.date_range(curve_start_date, periods=600 * unit_time_factor, freq=freq)
+
+    # Gets delta time by taking the date (day) - initial date (day) and divide by 365
+
+    delta_time_yrs = [(date - time[0]).days / 365 for date in time]
+
+    df_curve = pd.DataFrame(delta_time_yrs, columns=["delta_time_yrs"], index=time)
 
     di_secant = float(parent.ui.doubleSpinBoxDi.value() / 100)
     b_factor = float(parent.ui.doubleSpinBoxBFactor.value())
