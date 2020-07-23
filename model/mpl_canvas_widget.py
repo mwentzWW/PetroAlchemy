@@ -59,5 +59,5 @@ class DynamicMplCanvas(MyMplCanvas):
     def plot_decline_curve(self, parent):
         model_plot_decline_curve(self, parent)
 
-    def plot_production(self, parent, well_name):
-        model_plot_production(self, parent, well_name)
+    def plot_production(self, parent, well_name, init=False):
+        model_plot_production(self, parent, well_name, init)

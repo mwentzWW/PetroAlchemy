@@ -33,7 +33,7 @@ from model.create_decline_curve import (
 from model.import_data import import_data as model_import_data
 from model.plot_decline_curve import plot_decline_curve as model_plot_decline_curve
 from model.plot_production import plot_production as model_plot_production
-from model.plot_widgets import DynamicMplCanvas
+from model.mpl_canvas_widget import DynamicMplCanvas
 from ui_mainwindow import Ui_main_window
 
 mpl.use("Qt5Agg")
@@ -135,7 +135,7 @@ class MainWindow(QMainWindow):
     def well_selected(self, well_name):
         """Well selected in comboBoxWellSelect changed, and triggers production plot to redraw"""
 
-        self.widget_production_plot.plot_production(self, well_name)
+        self.widget_production_plot.plot_production(self, well_name, init=True)
         self.ui.widgetProductionPlot.update()
         self.widget_production_plot.update()
 

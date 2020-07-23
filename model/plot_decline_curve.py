@@ -1,10 +1,14 @@
-def plot_decline_curve(parent, curve_name=None):
+def plot_decline_curve(parent, curve_name=None, reset=True):
     """Plot decline curve from curves that have been created"""
 
     figure = parent.widget_production_plot
 
     if curve_name is None:
         curve_name = str(parent.ui.comboBoxDeclineCurves.currentText())
+
+    if reset:
+        well_name = parent.ui.comboBoxWellSelect.currentText()
+        parent.ui.widget_production_plot.plot_production(parent, well_name)
 
     if parent.ui.comboBoxPhase.currentText() == "Oil":
         color = "g"
