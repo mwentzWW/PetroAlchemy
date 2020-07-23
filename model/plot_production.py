@@ -71,13 +71,8 @@ def plot_production(self, parent, well_name):
     self.axes.set_xlim(datemin, datemax)
     self.axes.set_ylim(ymin=10)
 
-    # fig.subplots_adjust(left=0.05, right=0.95, top=0.90, bottom=0.15)
-
     self.axes.legend(bbox_to_anchor=(0, 1.02, 1, 0.102), loc=3, ncol=2, borderaxespad=0)
     self.axes.set_title(f"{well_name}", fontsize=16)
-
-    # Plot background
-    # self.axes.set_facecolor(grey_90)
 
     self.axes.set_ylabel(parent.ui.comboBoxUnits.currentText())
 
