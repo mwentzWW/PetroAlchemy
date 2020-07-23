@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 def plot_decline_curve(parent, curve_name=None, reset=True):
     """Plot decline curve from curves that have been created"""
 
@@ -21,7 +24,7 @@ def plot_decline_curve(parent, curve_name=None, reset=True):
 
     df_curve = parent.decline_curves_dict.get(curve_name)
     figure.axes.plot(
-        df_curve["months"],
+        df_curve.index,
         df_curve[curve_name],
         color,
         label=curve_name,
@@ -32,11 +35,13 @@ def plot_decline_curve(parent, curve_name=None, reset=True):
         bbox_to_anchor=(0, 1.02, 1, 0.102), loc=3, ncol=2, borderaxespad=0
     )
 
-    # Technical EURs (MBO/BCF)
+    # Technical EURs (MBO/BCF), user monthly grouper to handle daily data
 
-    eur_1_year = round(df_curve[curve_name][:11].sum() / unit_factor, 1)
-    eur_5_year = round(df_curve[curve_name][:59].sum() / unit_factor, 1)
-    eur_50_year = round(df_curve[curve_name][:599].sum() / unit_factor, 1)
+    groupby_monthly = df_curve.groupby(pd.Grouper(freq="M")).sum()
+
+    eur_1_year = round(groupby_monthly[curve_name][:11].sum() / unit_factor, 1)
+    eur_5_year = round(groupby_monthly[curve_name][:59].sum() / unit_factor, 1)
+    eur_50_year = round(groupby_monthly[curve_name][:599].sum() / unit_factor, 1)
 
     textstr = "\n".join(
         (
