@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
         self.ui.comboBoxPhase.addItems(["Oil", "Gas"])
         self.ui.comboBoxUnits.addItems(["BOPM/MCFPM", "BOPD/MCFPD"])
 
-    def about_version(self):
+    def help_version(self):
         "Message with current version info"
 
         msg = QMessageBox()

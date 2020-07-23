@@ -607,6 +607,7 @@ class Ui_main_window(object):
                         "{\n"
 "   background: none;\n"
 "}")
+        main_window.setToolButtonStyle(Qt.ToolButtonIconOnly)
         self.actionImport_Data = QAction(main_window)
         self.actionImport_Data.setObjectName(u"actionImport_Data")
         self.actionImport_Data.setCheckable(True)
@@ -621,9 +622,6 @@ class Ui_main_window(object):
         self.actionSponsor = QAction(main_window)
         self.actionSponsor.setObjectName(u"actionSponsor")
         self.actionSponsor.setFont(font)
-        self.actionProject_Website = QAction(main_window)
-        self.actionProject_Website.setObjectName(u"actionProject_Website")
-        self.actionProject_Website.setFont(font)
         self.actionDocumentation = QAction(main_window)
         self.actionDocumentation.setObjectName(u"actionDocumentation")
         self.actionDocumentation.setFont(font)
@@ -648,6 +646,9 @@ class Ui_main_window(object):
         self.actionCurrent_Version = QAction(main_window)
         self.actionCurrent_Version.setObjectName(u"actionCurrent_Version")
         self.actionCurrent_Version.setFont(font)
+        self.actionImport_Data_2 = QAction(main_window)
+        self.actionImport_Data_2.setObjectName(u"actionImport_Data_2")
+        self.actionImport_Data_2.setIcon(icon1)
         self.centralwidget = QWidget(main_window)
         self.centralwidget.setObjectName(u"centralwidget")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -684,7 +685,7 @@ class Ui_main_window(object):
         self.tabMainMenu.setObjectName(u"tabMainMenu")
         self.label = QLabel(self.tabMainMenu)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(420, 20, 201, 61))
+        self.label.setGeometry(QRect(370, 10, 991, 191))
         font2 = QFont()
         font2.setFamily(u"Cascadia Mono")
         font2.setPointSize(14)
@@ -694,6 +695,8 @@ class Ui_main_window(object):
         self.wellListView.setGeometry(QRect(10, 40, 341, 511))
         self.wellListView.setFont(font1)
         self.wellListView.setFrameShadow(QFrame.Sunken)
+        self.wellListView.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.wellListView.setAlternatingRowColors(True)
         self.wellListLabel = QLabel(self.tabMainMenu)
         self.wellListLabel.setObjectName(u"wellListLabel")
         self.wellListLabel.setGeometry(QRect(30, 10, 141, 21))
@@ -758,12 +761,6 @@ class Ui_main_window(object):
 
         self.verticalLayout.addWidget(self.dateEditCurveStart)
 
-        self.horizontalSliderDate = QSlider(self.groupBox)
-        self.horizontalSliderDate.setObjectName(u"horizontalSliderDate")
-        self.horizontalSliderDate.setOrientation(Qt.Horizontal)
-
-        self.verticalLayout.addWidget(self.horizontalSliderDate)
-
         self.label_5 = QLabel(self.groupBox)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setFont(font4)
@@ -778,15 +775,6 @@ class Ui_main_window(object):
 
         self.verticalLayout.addWidget(self.spinBoxRate)
 
-        self.horizontalSliderRate = QSlider(self.groupBox)
-        self.horizontalSliderRate.setObjectName(u"horizontalSliderRate")
-        self.horizontalSliderRate.setMaximum(1000000)
-        self.horizontalSliderRate.setSingleStep(100)
-        self.horizontalSliderRate.setSliderPosition(0)
-        self.horizontalSliderRate.setOrientation(Qt.Horizontal)
-
-        self.verticalLayout.addWidget(self.horizontalSliderRate)
-
         self.label_6 = QLabel(self.groupBox)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setFont(font4)
@@ -799,12 +787,6 @@ class Ui_main_window(object):
         self.doubleSpinBoxDi.setSingleStep(0.500000000000000)
 
         self.verticalLayout.addWidget(self.doubleSpinBoxDi)
-
-        self.horizontalSliderDi = QSlider(self.groupBox)
-        self.horizontalSliderDi.setObjectName(u"horizontalSliderDi")
-        self.horizontalSliderDi.setOrientation(Qt.Horizontal)
-
-        self.verticalLayout.addWidget(self.horizontalSliderDi)
 
         self.label_7 = QLabel(self.groupBox)
         self.label_7.setObjectName(u"label_7")
@@ -821,13 +803,6 @@ class Ui_main_window(object):
 
         self.verticalLayout.addWidget(self.doubleSpinBoxBFactor)
 
-        self.horizontalSliderBFactor = QSlider(self.groupBox)
-        self.horizontalSliderBFactor.setObjectName(u"horizontalSliderBFactor")
-        self.horizontalSliderBFactor.setMaximum(2)
-        self.horizontalSliderBFactor.setOrientation(Qt.Horizontal)
-
-        self.verticalLayout.addWidget(self.horizontalSliderBFactor)
-
         self.label_10 = QLabel(self.groupBox)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setFont(font4)
@@ -839,14 +814,6 @@ class Ui_main_window(object):
         self.doubleSpinBoxMinDecline.setFont(font1)
 
         self.verticalLayout.addWidget(self.doubleSpinBoxMinDecline)
-
-        self.horizontalSlider = QSlider(self.groupBox)
-        self.horizontalSlider.setObjectName(u"horizontalSlider")
-        self.horizontalSlider.setOrientation(Qt.Horizontal)
-        self.horizontalSlider.setTickPosition(QSlider.NoTicks)
-        self.horizontalSlider.setTickInterval(0)
-
-        self.verticalLayout.addWidget(self.horizontalSlider)
 
         self.label_9 = QLabel(self.groupBox)
         self.label_9.setObjectName(u"label_9")
@@ -946,16 +913,14 @@ class Ui_main_window(object):
         self.menuFile.setFont(font)
         self.menu_Help = QMenu(self.menubar)
         self.menu_Help.setObjectName(u"menu_Help")
-        self.menu_About = QMenu(self.menubar)
-        self.menu_About.setObjectName(u"menu_About")
         main_window.setMenuBar(self.menubar)
         self.toolBar = QToolBar(main_window)
         self.toolBar.setObjectName(u"toolBar")
         main_window.addToolBar(Qt.TopToolBarArea, self.toolBar)
 
         self.menubar.addAction(self.menuFile.menuAction())
-        self.menubar.addAction(self.menu_About.menuAction())
         self.menubar.addAction(self.menu_Help.menuAction())
+        self.menuFile.addAction(self.actionImport_Data_2)
         self.menu_Help.addAction(self.actionTutorial)
         self.menu_Help.addAction(self.actionDocumentation)
         self.menu_Help.addAction(self.actionWebsite)
@@ -966,15 +931,12 @@ class Ui_main_window(object):
         self.menu_Help.addSeparator()
         self.menu_Help.addAction(self.actionContact_project_creator)
         self.menu_Help.addAction(self.actionTake_survey_to_improve_the_project)
-        self.menu_About.addAction(self.actionCurrent_Version)
+        self.menu_Help.addSeparator()
+        self.menu_Help.addAction(self.actionCurrent_Version)
         self.toolBar.addAction(self.actionImport_Data)
 
         self.retranslateUi(main_window)
         self.actionImport_Data.triggered.connect(main_window.import_data)
-        self.horizontalSliderRate.valueChanged.connect(self.spinBoxRate.setValue)
-        self.horizontalSliderDate.valueChanged.connect(self.dateEditCurveStart.stepUp)
-        self.horizontalSliderDi.valueChanged.connect(self.doubleSpinBoxDi.stepUp)
-        self.horizontalSliderBFactor.valueChanged.connect(self.doubleSpinBoxBFactor.stepUp)
         self.comboBoxWellSelect.currentTextChanged.connect(main_window.well_selected)
         self.actionTutorial.triggered.connect(main_window.help_tutorial)
         self.actionDocumentation.triggered.connect(main_window.help_documentation)
@@ -984,11 +946,9 @@ class Ui_main_window(object):
         self.actionBugs_and_feature_requests.triggered.connect(main_window.help_open_bugs_features)
         self.actionContact_project_creator.triggered.connect(main_window.help_contact)
         self.actionTake_survey_to_improve_the_project.triggered.connect(main_window.help_take_survey)
-        self.actionCurrent_Version.triggered.connect(main_window.about_version)
-        self.horizontalSlider.valueChanged.connect(self.doubleSpinBoxMinDecline.stepUp)
-        self.spinBoxRate.valueChanged.connect(self.horizontalSliderRate.setValue)
+        self.actionCurrent_Version.triggered.connect(main_window.help_version)
         self.pushButtonCreateDeclineCurve.clicked.connect(main_window.create_decline_curve)
-        self.horizontalSliderRate.valueChanged.connect(main_window.create_decline_curve)
+        self.actionImport_Data_2.triggered.connect(main_window.import_data)
 
         self.tabWidget.setCurrentIndex(0)
 
@@ -1004,7 +964,6 @@ class Ui_main_window(object):
 #endif // QT_CONFIG(tooltip)
         self.actionTutorial.setText(QCoreApplication.translate("main_window", u"Tutorial", None))
         self.actionSponsor.setText(QCoreApplication.translate("main_window", u"Sponsor", None))
-        self.actionProject_Website.setText(QCoreApplication.translate("main_window", u"Project Website", None))
         self.actionDocumentation.setText(QCoreApplication.translate("main_window", u"Documentation", None))
         self.actionWebsite.setText(QCoreApplication.translate("main_window", u"Website", None))
         self.actionReport_a_bug.setText(QCoreApplication.translate("main_window", u"Report a bug", None))
@@ -1013,11 +972,12 @@ class Ui_main_window(object):
         self.actionContact_project_creator.setText(QCoreApplication.translate("main_window", u"Contact project creator", None))
         self.actionTake_survey_to_improve_the_project.setText(QCoreApplication.translate("main_window", u"Take survey to improve the project", None))
         self.actionCurrent_Version.setText(QCoreApplication.translate("main_window", u"Current Version", None))
+        self.actionImport_Data_2.setText(QCoreApplication.translate("main_window", u"Import Data", None))
 #if QT_CONFIG(tooltip)
         self.comboBoxWellSelect.setToolTip("")
 #endif // QT_CONFIG(tooltip)
         self.comboBoxWellSelect.setCurrentText("")
-        self.label.setText(QCoreApplication.translate("main_window", u"<html><head/><body><p><span style=\" font-size:22pt; font-weight:600;\">Welcome!</span></p></body></html>", None))
+        self.label.setText(QCoreApplication.translate("main_window", u"<html><head/><body><p><span style=\" font-size:22pt; font-weight:600;\">Welcome!</span></p><p>You need to import production data to get started. </p><p>Use at your own discretion. </p><p>This application is open source to provide useful software to engineers and evaluators.</p></body></html>", None))
         self.wellListLabel.setText(QCoreApplication.translate("main_window", u"Well List", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabMainMenu), QCoreApplication.translate("main_window", u"Main Menu", None))
         self.groupBox.setTitle(QCoreApplication.translate("main_window", u"Decline Curve Analysis", None))
@@ -1037,7 +997,7 @@ class Ui_main_window(object):
 #if QT_CONFIG(tooltip)
         self.pushButtonRemoveDeclineCurves.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Removes the decline curves from the plot, but does not delete them form the application</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButtonRemoveDeclineCurves.setText(QCoreApplication.translate("main_window", u"Remove Decline Curves", None))
+        self.pushButtonRemoveDeclineCurves.setText(QCoreApplication.translate("main_window", u"Remove Decline Curve", None))
 #if QT_CONFIG(tooltip)
         self.pushButtonPlotDeclineCurve.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Plots selected decline curve if it already exists</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -1051,7 +1011,6 @@ class Ui_main_window(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabCashflowSetup), QCoreApplication.translate("main_window", u"Cashflow Setup", None))
         self.menuFile.setTitle(QCoreApplication.translate("main_window", u"&File", None))
         self.menu_Help.setTitle(QCoreApplication.translate("main_window", u"&Help", None))
-        self.menu_About.setTitle(QCoreApplication.translate("main_window", u"&About", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("main_window", u"toolBar", None))
     # retranslateUi
 
