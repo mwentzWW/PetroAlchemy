@@ -11,7 +11,7 @@ from PySide2.QtWidgets import QApplication, QFileDialog, QMainWindow, QMessageBo
 def import_data(self):
 
     dialog = QFileDialog(self)
-    dialog.setFileMode(QFileDialog.AnyFile)
+    dialog.setFileMode(QFileDialog.ExistingFiles)
 
     # filter files to excel and csv, not working yet
     # dialog.setNameFilter(QObject.tr("Excel/CSV (*.xls *.xlss *.csv)"))
@@ -21,6 +21,8 @@ def import_data(self):
 
     if dialog.exec_():
         filenames = dialog.selectedFiles()
+
+    wells_total = 0
 
     for fname in filenames:
         file_type = Path(fname).suffix
@@ -41,6 +43,8 @@ def import_data(self):
 
         num_wells = len(well_names)
 
+        wells_total = wells_total + num_wells
+
         for well_name in well_names:
 
             well_name = str(well_name)
@@ -59,14 +63,6 @@ def import_data(self):
                     df["well name"] == well_name
                 ].reset_index()
 
-                if num_wells == 1:
-
-                    msg = QMessageBox()
-                    msg.setIcon(QMessageBox.Information)
-                    msg.setText(f"{well_name} has been added 🚀")
-                    msg.setWindowTitle("Import Finished")
-                    msg.exec_()
-
             else:
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Warning)
@@ -74,9 +70,15 @@ def import_data(self):
                 msg.setWindowTitle("Import Failed")
                 msg.exec_()
 
-        if num_wells > 1:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
-            msg.setText(f"{num_wells} wells have been added 🚀")
-            msg.setWindowTitle("Import Finished")
-            msg.exec_()
+    if wells_total > 1:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText(f"{wells_total} wells have been added 🚀")
+        msg.setWindowTitle("Import Finished")
+        msg.exec_()
+    else:
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText(f"{well_name} has been added 🚀")
+        msg.setWindowTitle("Import Finished")
+        msg.exec_()
