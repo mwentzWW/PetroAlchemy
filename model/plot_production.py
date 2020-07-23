@@ -16,6 +16,10 @@ def plot_production(self, parent, well_name):
 
     parent.ui.lineEditDeclineCurveName.setText(f"{well_name} Oil Decline Curve")
 
+    # Set dateEditCurveStart as first date of dataframe
+
+    parent.ui.dateEditCurveStart.setDate(df_selected["date"][0])
+
     # set plot widgets with oil early max
 
     parent.ui.spinBoxRate.setValue(int(df_selected.oil[:6].max()))
