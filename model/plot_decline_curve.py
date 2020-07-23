@@ -8,7 +8,7 @@ def plot_decline_curve(parent, curve_name=None, reset=True):
 
     if reset:
         well_name = parent.ui.comboBoxWellSelect.currentText()
-        parent.ui.widget_production_plot.plot_production(parent, well_name)
+        parent.widget_production_plot.plot_production(parent, well_name)
 
     if parent.ui.comboBoxPhase.currentText() == "Oil":
         color = "g"
