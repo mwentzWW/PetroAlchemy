@@ -139,6 +139,15 @@ class MainWindow(QMainWindow):
         self.ui.widgetProductionPlot.update()
         self.widget_production_plot.update()
 
+    @Slot(str)
+    def units_changed(self, units):
+        """Well units selected (BOPM/MCFPM or BOPD/MCFPD) and label needs to refresh"""
+
+        self.widget_production_plot.axes.set_ylabel(units)
+        self.widget_production_plot.draw()
+        self.ui.widgetProductionPlot.update()
+        self.widget_production_plot.update()
+
     def create_decline_curve(self):
         """Calls create_decline_curve from model/"""
 
