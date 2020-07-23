@@ -57,7 +57,7 @@ def import_data(self):
                 dict_well_name = well_name.replace(" ", "_")
                 self.well_dataframes_dict[dict_well_name] = df.loc[
                     df["well name"] == well_name
-                ]
+                ].reset_index()
 
                 if num_wells == 1:
 
