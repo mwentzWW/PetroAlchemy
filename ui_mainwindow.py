@@ -812,6 +812,7 @@ class Ui_main_window(object):
         self.doubleSpinBoxMinDecline = QDoubleSpinBox(self.groupBox)
         self.doubleSpinBoxMinDecline.setObjectName(u"doubleSpinBoxMinDecline")
         self.doubleSpinBoxMinDecline.setFont(font1)
+        self.doubleSpinBoxMinDecline.setValue(6.000000000000000)
 
         self.verticalLayout.addWidget(self.doubleSpinBoxMinDecline)
 
@@ -949,6 +950,7 @@ class Ui_main_window(object):
         self.actionCurrent_Version.triggered.connect(main_window.help_version)
         self.pushButtonCreateDeclineCurve.clicked.connect(main_window.create_decline_curve)
         self.actionImport_Data_2.triggered.connect(main_window.import_data)
+        self.comboBoxUnits.currentTextChanged.connect(main_window.units_changed)
 
         self.tabWidget.setCurrentIndex(0)
 
