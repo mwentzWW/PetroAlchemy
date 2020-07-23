@@ -25,11 +25,21 @@ def plot_production(self, parent, well_name, init=False):
 
         parent.ui.spinBoxRate.setValue(int(df_selected.oil[:6].max()))
         max_id = df_selected.oil[:6].idxmax()
-        di_estimate_float = (
-            df_selected["oil"][max_id] - df_selected["oil"][max_id + 12]
-        ) / df_selected["oil"][max_id]
-        di_estimate_pct = round(di_estimate_float * 100, 2)
-        parent.ui.doubleSpinBoxDi.setValue(di_estimate_pct)
+
+        if len(df_selected.index) > 11:
+            di_estimate_float = (
+                df_selected["oil"][max_id] - df_selected["oil"][max_id + 12]
+            ) / df_selected["oil"][max_id]
+
+            time_scale = (
+                df_selected["date"][max_id + 12] - df_selected["date"][max_id]
+            ).days
+
+            if time_scale == 365:
+                di_estimate_pct = round(di_estimate_float * 100, 2)
+                parent.ui.doubleSpinBoxDi.setValue(di_estimate_pct)
+        else:
+            parent.ui.doubleSpinBoxDi.setValue(0)
 
     # Plot chart
 
@@ -51,11 +61,24 @@ def plot_production(self, parent, well_name, init=False):
 
     years = mdates.YearLocator()  # every year
     months = mdates.MonthLocator()  # every month
+    days = mdates.DayLocator()
     x_format = mdates.DateFormatter("%m/%d/%Y")
 
-    self.axes.xaxis.set_major_locator(years)
-    self.axes.xaxis.set_major_formatter(x_format)
-    self.axes.xaxis.set_minor_locator(months)
+    year_range = df_selected["date"].max().year - df_selected["date"].min().year
+
+    if year_range < 2:
+        self.axes.xaxis.set_major_locator(months)
+        self.axes.xaxis.set_major_formatter(x_format)
+
+    else:
+        self.axes.xaxis.set_major_locator(years)
+        self.axes.xaxis.set_major_formatter(x_format)
+        self.axes.xaxis.set_minor_locator(months)
+
+    datemin = datetime.date(df_selected["date"].min().year, 1, 1)
+    datemax = datetime.date(df_selected["date"].max().year + 1, 1, 1)
+    self.axes.set_xlim(datemin, datemax)
+    self.axes.set_ylim(ymin=10)
 
     for label in self.axes.xaxis.get_ticklabels():
         label.set_rotation(45)
@@ -66,11 +89,6 @@ def plot_production(self, parent, well_name, init=False):
     self.axes.grid(
         which="both", axis="y", color="grey", linestyle="--", linewidth=1, alpha=0.5,
     )
-
-    datemin = datetime.date(df_selected["date"].min().year, 1, 1)
-    datemax = datetime.date(df_selected["date"].max().year + 1, 1, 1)
-    self.axes.set_xlim(datemin, datemax)
-    self.axes.set_ylim(ymin=10)
 
     self.axes.legend(
         bbox_to_anchor=(0, 1.02, 1, 0.102), loc="best", ncol=2, borderaxespad=0
