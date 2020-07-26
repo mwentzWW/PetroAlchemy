@@ -39,7 +39,7 @@ def plot_production(self, parent, well_name, init=False):
                 di_estimate_pct = round(di_estimate_float * 100, 2)
                 parent.ui.doubleSpinBoxDi.setValue(di_estimate_pct)
         else:
-            parent.ui.doubleSpinBoxDi.setValue(0)
+            parent.ui.doubleSpinBoxDi.setValue(75)
 
     # Plot chart
 
