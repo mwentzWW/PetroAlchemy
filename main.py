@@ -38,7 +38,7 @@ from ui_mainwindow import Ui_main_window
 
 mpl.use("Qt5Agg")
 
-VERSION = "0.3.0-beta"
+VERSION = "0.3.0"
 
 
 class MainWindow(QMainWindow):
