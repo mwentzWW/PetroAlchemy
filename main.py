@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
         self.ui.comboBoxUnits.addItems(["BOPM/MCFPM", "BOPD/MCFPD"])
 
     def help_version(self):
-        "Message with current version info"
+        """Message with current version info"""
 
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -114,17 +114,17 @@ class MainWindow(QMainWindow):
         )
 
     def help_open_bugs_features(self):
-        "Open current bugs and features on github"
+        """Open current bugs and features on github"""
 
         webbrowser.open("https://github.com/mwentzWW/PetroAlchemy/issues")
 
     def help_contact(self):
-        "Open linkedin page"
+        """Open linkedin page"""
 
         webbrowser.open("https://www.linkedin.com/in/mwentzww/")
 
     def help_take_survey(self):
-        "Open survey"
+        """Open survey"""
 
         webbrowser.open("https://www.surveymonkey.com/r/F22RYZ5")
 
