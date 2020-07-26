@@ -657,8 +657,8 @@ class Ui_main_window(object):
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setStyleSheet(u"aqua")
-        self.gridLayout_2 = QGridLayout(self.centralwidget)
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.comboBoxWellSelect = QComboBox(self.centralwidget)
         self.comboBoxWellSelect.setObjectName(u"comboBoxWellSelect")
         self.comboBoxWellSelect.setMaximumSize(QSize(300, 16777215))
@@ -668,7 +668,7 @@ class Ui_main_window(object):
         self.comboBoxWellSelect.setFont(font1)
         self.comboBoxWellSelect.setMaxVisibleItems(25)
 
-        self.gridLayout_2.addWidget(self.comboBoxWellSelect, 0, 0, 1, 1)
+        self.verticalLayout_2.addWidget(self.comboBoxWellSelect)
 
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
@@ -715,16 +715,16 @@ class Ui_main_window(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.groupBox = QGroupBox(self.tabProductionPlots)
         self.groupBox.setObjectName(u"groupBox")
+        self.groupBox.setFont(font3)
+        self.verticalLayout = QVBoxLayout(self.groupBox)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.label_2 = QLabel(self.groupBox)
+        self.label_2.setObjectName(u"label_2")
         font4 = QFont()
         font4.setFamily(u"Cascadia Code SemiBold")
         font4.setPointSize(12)
         font4.setBold(True)
         font4.setWeight(75)
-        self.groupBox.setFont(font4)
-        self.verticalLayout = QVBoxLayout(self.groupBox)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label_2 = QLabel(self.groupBox)
-        self.label_2.setObjectName(u"label_2")
         self.label_2.setFont(font4)
 
         self.verticalLayout.addWidget(self.label_2)
@@ -816,20 +816,12 @@ class Ui_main_window(object):
 
         self.verticalLayout.addWidget(self.doubleSpinBoxMinDecline)
 
-        self.label_9 = QLabel(self.groupBox)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font4)
+        self.line_2 = QFrame(self.groupBox)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
 
-        self.verticalLayout.addWidget(self.label_9)
-
-        self.comboBoxDeclineCurves = QComboBox(self.groupBox)
-        self.comboBoxDeclineCurves.setObjectName(u"comboBoxDeclineCurves")
-        font5 = QFont()
-        font5.setFamily(u"Cascadia Code")
-        font5.setPointSize(10)
-        self.comboBoxDeclineCurves.setFont(font5)
-
-        self.verticalLayout.addWidget(self.comboBoxDeclineCurves)
+        self.verticalLayout.addWidget(self.line_2)
 
         self.label_8 = QLabel(self.groupBox)
         self.label_8.setObjectName(u"label_8")
@@ -846,31 +838,77 @@ class Ui_main_window(object):
 
         self.pushButtonCreateDeclineCurve = QPushButton(self.groupBox)
         self.pushButtonCreateDeclineCurve.setObjectName(u"pushButtonCreateDeclineCurve")
-        font6 = QFont()
-        font6.setFamily(u"Cascadia Code SemiBold")
-        font6.setPointSize(10)
-        font6.setBold(True)
-        font6.setWeight(75)
-        self.pushButtonCreateDeclineCurve.setFont(font6)
+        font5 = QFont()
+        font5.setFamily(u"Cascadia Code SemiBold")
+        font5.setPointSize(10)
+        font5.setBold(True)
+        font5.setWeight(75)
+        self.pushButtonCreateDeclineCurve.setFont(font5)
         self.pushButtonCreateDeclineCurve.setCheckable(False)
 
         self.verticalLayout.addWidget(self.pushButtonCreateDeclineCurve)
 
+        self.line = QFrame(self.groupBox)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout.addWidget(self.line)
+
+        self.label_9 = QLabel(self.groupBox)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setFont(font4)
+
+        self.verticalLayout.addWidget(self.label_9)
+
+        self.comboBoxOilDeclineCurves = QComboBox(self.groupBox)
+        self.comboBoxOilDeclineCurves.setObjectName(u"comboBoxOilDeclineCurves")
+        font6 = QFont()
+        font6.setFamily(u"Cascadia Code")
+        font6.setPointSize(10)
+        self.comboBoxOilDeclineCurves.setFont(font6)
+
+        self.verticalLayout.addWidget(self.comboBoxOilDeclineCurves)
+
+        self.label_24 = QLabel(self.groupBox)
+        self.label_24.setObjectName(u"label_24")
+        self.label_24.setFont(font4)
+
+        self.verticalLayout.addWidget(self.label_24)
+
+        self.comboBoxGasDeclineCurves = QComboBox(self.groupBox)
+        self.comboBoxGasDeclineCurves.setObjectName(u"comboBoxGasDeclineCurves")
+        self.comboBoxGasDeclineCurves.setFont(font6)
+
+        self.verticalLayout.addWidget(self.comboBoxGasDeclineCurves)
+
+        self.checkBox = QCheckBox(self.groupBox)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setFont(font1)
+
+        self.verticalLayout.addWidget(self.checkBox)
+
+        self.checkBox_2 = QCheckBox(self.groupBox)
+        self.checkBox_2.setObjectName(u"checkBox_2")
+        self.checkBox_2.setFont(font1)
+
+        self.verticalLayout.addWidget(self.checkBox_2)
+
         self.pushButtonRemoveDeclineCurves = QPushButton(self.groupBox)
         self.pushButtonRemoveDeclineCurves.setObjectName(u"pushButtonRemoveDeclineCurves")
-        self.pushButtonRemoveDeclineCurves.setFont(font6)
+        self.pushButtonRemoveDeclineCurves.setFont(font5)
 
         self.verticalLayout.addWidget(self.pushButtonRemoveDeclineCurves)
 
         self.pushButtonPlotDeclineCurve = QPushButton(self.groupBox)
         self.pushButtonPlotDeclineCurve.setObjectName(u"pushButtonPlotDeclineCurve")
-        self.pushButtonPlotDeclineCurve.setFont(font6)
+        self.pushButtonPlotDeclineCurve.setFont(font5)
 
         self.verticalLayout.addWidget(self.pushButtonPlotDeclineCurve)
 
         self.pushButtonDeleteDeclineCurve = QPushButton(self.groupBox)
         self.pushButtonDeleteDeclineCurve.setObjectName(u"pushButtonDeleteDeclineCurve")
-        self.pushButtonDeleteDeclineCurve.setFont(font6)
+        self.pushButtonDeleteDeclineCurve.setFont(font5)
 
         self.verticalLayout.addWidget(self.pushButtonDeleteDeclineCurve)
 
@@ -891,16 +929,205 @@ class Ui_main_window(object):
         self.tabWidget.addTab(self.tabProductionPlots, icon3, "")
         self.tabCashflowSetup = QWidget()
         self.tabCashflowSetup.setObjectName(u"tabCashflowSetup")
-        self.tabCashflowSetup.setFont(font5)
+        self.tabCashflowSetup.setFont(font6)
         self.groupBoxCashflowSetup = QGroupBox(self.tabCashflowSetup)
         self.groupBoxCashflowSetup.setObjectName(u"groupBoxCashflowSetup")
-        self.groupBoxCashflowSetup.setGeometry(QRect(10, 10, 1081, 481))
-        self.groupBoxCashflowSetup.setFont(font1)
+        self.groupBoxCashflowSetup.setGeometry(QRect(10, 10, 611, 431))
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(1)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.groupBoxCashflowSetup.sizePolicy().hasHeightForWidth())
+        self.groupBoxCashflowSetup.setSizePolicy(sizePolicy2)
+        self.groupBoxCashflowSetup.setFont(font3)
+        self.formLayout = QFormLayout(self.groupBoxCashflowSetup)
+        self.formLayout.setObjectName(u"formLayout")
+        self.label_11 = QLabel(self.groupBoxCashflowSetup)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setFont(font4)
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_11)
+
+        self.comboBoxOilDeclineCurve = QComboBox(self.groupBoxCashflowSetup)
+        self.comboBoxOilDeclineCurve.setObjectName(u"comboBoxOilDeclineCurve")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.comboBoxOilDeclineCurve.sizePolicy().hasHeightForWidth())
+        self.comboBoxOilDeclineCurve.setSizePolicy(sizePolicy3)
+        self.comboBoxOilDeclineCurve.setFont(font1)
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.comboBoxOilDeclineCurve)
+
+        self.label_12 = QLabel(self.groupBoxCashflowSetup)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setFont(font4)
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_12)
+
+        self.comboBoxGasDeclineCurve = QComboBox(self.groupBoxCashflowSetup)
+        self.comboBoxGasDeclineCurve.setObjectName(u"comboBoxGasDeclineCurve")
+        sizePolicy3.setHeightForWidth(self.comboBoxGasDeclineCurve.sizePolicy().hasHeightForWidth())
+        self.comboBoxGasDeclineCurve.setSizePolicy(sizePolicy3)
+        self.comboBoxGasDeclineCurve.setFont(font1)
+
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.comboBoxGasDeclineCurve)
+
+        self.label_13 = QLabel(self.groupBoxCashflowSetup)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setFont(font4)
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_13)
+
+        self.dateEditCurveStart_2 = QDateEdit(self.groupBoxCashflowSetup)
+        self.dateEditCurveStart_2.setObjectName(u"dateEditCurveStart_2")
+        self.dateEditCurveStart_2.setFont(font1)
+        self.dateEditCurveStart_2.setCalendarPopup(True)
+        self.dateEditCurveStart_2.setDate(QDate(2020, 1, 1))
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.dateEditCurveStart_2)
+
+        self.label_14 = QLabel(self.groupBoxCashflowSetup)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setFont(font4)
+
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_14)
+
+        self.doubleSpinBoxWorkingInterest = QDoubleSpinBox(self.groupBoxCashflowSetup)
+        self.doubleSpinBoxWorkingInterest.setObjectName(u"doubleSpinBoxWorkingInterest")
+        self.doubleSpinBoxWorkingInterest.setFont(font1)
+        self.doubleSpinBoxWorkingInterest.setMaximum(100.000000000000000)
+        self.doubleSpinBoxWorkingInterest.setValue(100.000000000000000)
+
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.doubleSpinBoxWorkingInterest)
+
+        self.label_15 = QLabel(self.groupBoxCashflowSetup)
+        self.label_15.setObjectName(u"label_15")
+        self.label_15.setFont(font4)
+
+        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_15)
+
+        self.doubleSpinBoxNetRevenueInterest = QDoubleSpinBox(self.groupBoxCashflowSetup)
+        self.doubleSpinBoxNetRevenueInterest.setObjectName(u"doubleSpinBoxNetRevenueInterest")
+        self.doubleSpinBoxNetRevenueInterest.setFont(font1)
+        self.doubleSpinBoxNetRevenueInterest.setMaximum(100.000000000000000)
+        self.doubleSpinBoxNetRevenueInterest.setValue(75.000000000000000)
+
+        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.doubleSpinBoxNetRevenueInterest)
+
+        self.label_16 = QLabel(self.groupBoxCashflowSetup)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setFont(font4)
+
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.label_16)
+
+        self.spinBoxDiscountRate = QSpinBox(self.groupBoxCashflowSetup)
+        self.spinBoxDiscountRate.setObjectName(u"spinBoxDiscountRate")
+        self.spinBoxDiscountRate.setFont(font1)
+        self.spinBoxDiscountRate.setValue(10)
+
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.spinBoxDiscountRate)
+
+        self.label_17 = QLabel(self.groupBoxCashflowSetup)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setFont(font4)
+
+        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_17)
+
+        self.spinBoxSeveranceTax = QSpinBox(self.groupBoxCashflowSetup)
+        self.spinBoxSeveranceTax.setObjectName(u"spinBoxSeveranceTax")
+        self.spinBoxSeveranceTax.setFont(font1)
+        self.spinBoxSeveranceTax.setValue(7)
+
+        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.spinBoxSeveranceTax)
+
+        self.label_18 = QLabel(self.groupBoxCashflowSetup)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setFont(font4)
+
+        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.label_18)
+
+        self.doubleSpinBoxOilPrice = QDoubleSpinBox(self.groupBoxCashflowSetup)
+        self.doubleSpinBoxOilPrice.setObjectName(u"doubleSpinBoxOilPrice")
+        self.doubleSpinBoxOilPrice.setFont(font1)
+        self.doubleSpinBoxOilPrice.setValue(50.000000000000000)
+
+        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.doubleSpinBoxOilPrice)
+
+        self.label_19 = QLabel(self.groupBoxCashflowSetup)
+        self.label_19.setObjectName(u"label_19")
+        self.label_19.setFont(font4)
+
+        self.formLayout.setWidget(8, QFormLayout.LabelRole, self.label_19)
+
+        self.doubleSpinBoxGasPrice = QDoubleSpinBox(self.groupBoxCashflowSetup)
+        self.doubleSpinBoxGasPrice.setObjectName(u"doubleSpinBoxGasPrice")
+        self.doubleSpinBoxGasPrice.setFont(font1)
+        self.doubleSpinBoxGasPrice.setSingleStep(0.100000000000000)
+        self.doubleSpinBoxGasPrice.setValue(2.500000000000000)
+
+        self.formLayout.setWidget(8, QFormLayout.FieldRole, self.doubleSpinBoxGasPrice)
+
+        self.label_20 = QLabel(self.groupBoxCashflowSetup)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setFont(font4)
+
+        self.formLayout.setWidget(9, QFormLayout.LabelRole, self.label_20)
+
+        self.doubleSpinBoxOilDiff = QDoubleSpinBox(self.groupBoxCashflowSetup)
+        self.doubleSpinBoxOilDiff.setObjectName(u"doubleSpinBoxOilDiff")
+        self.doubleSpinBoxOilDiff.setFont(font1)
+        self.doubleSpinBoxOilDiff.setSingleStep(0.500000000000000)
+        self.doubleSpinBoxOilDiff.setValue(2.000000000000000)
+
+        self.formLayout.setWidget(9, QFormLayout.FieldRole, self.doubleSpinBoxOilDiff)
+
+        self.label_21 = QLabel(self.groupBoxCashflowSetup)
+        self.label_21.setObjectName(u"label_21")
+        self.label_21.setFont(font4)
+
+        self.formLayout.setWidget(10, QFormLayout.LabelRole, self.label_21)
+
+        self.doubleSpinBoxGasDiff = QDoubleSpinBox(self.groupBoxCashflowSetup)
+        self.doubleSpinBoxGasDiff.setObjectName(u"doubleSpinBoxGasDiff")
+        self.doubleSpinBoxGasDiff.setFont(font1)
+        self.doubleSpinBoxGasDiff.setSingleStep(0.500000000000000)
+        self.doubleSpinBoxGasDiff.setValue(0.500000000000000)
+
+        self.formLayout.setWidget(10, QFormLayout.FieldRole, self.doubleSpinBoxGasDiff)
+
+        self.label_22 = QLabel(self.groupBoxCashflowSetup)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setFont(font4)
+
+        self.formLayout.setWidget(11, QFormLayout.LabelRole, self.label_22)
+
+        self.spinBoxOPEX = QSpinBox(self.groupBoxCashflowSetup)
+        self.spinBoxOPEX.setObjectName(u"spinBoxOPEX")
+        self.spinBoxOPEX.setFont(font1)
+        self.spinBoxOPEX.setMaximum(100000)
+        self.spinBoxOPEX.setSingleStep(500)
+        self.spinBoxOPEX.setValue(10000)
+
+        self.formLayout.setWidget(11, QFormLayout.FieldRole, self.spinBoxOPEX)
+
+        self.label_23 = QLabel(self.groupBoxCashflowSetup)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setFont(font4)
+
+        self.formLayout.setWidget(12, QFormLayout.LabelRole, self.label_23)
+
+        self.doubleSpinBoxCAPEX = QDoubleSpinBox(self.groupBoxCashflowSetup)
+        self.doubleSpinBoxCAPEX.setObjectName(u"doubleSpinBoxCAPEX")
+        self.doubleSpinBoxCAPEX.setFont(font1)
+        self.doubleSpinBoxCAPEX.setValue(8.000000000000000)
+
+        self.formLayout.setWidget(12, QFormLayout.FieldRole, self.doubleSpinBoxCAPEX)
+
         icon4 = QIcon()
         icon4.addFile(u"resources/4288564 - banking business cash income money.png", QSize(), QIcon.Normal, QIcon.Off)
         self.tabWidget.addTab(self.tabCashflowSetup, icon4, "")
 
-        self.gridLayout_2.addWidget(self.tabWidget, 1, 0, 1, 1)
+        self.verticalLayout_2.addWidget(self.tabWidget)
 
         main_window.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(main_window)
@@ -999,26 +1226,68 @@ class Ui_main_window(object):
         self.label_7.setText(QCoreApplication.translate("main_window", u"B Factor", None))
         self.label_10.setText(QCoreApplication.translate("main_window", u"Minimum Decline (effective %), 1/yr", None))
         self.doubleSpinBoxMinDecline.setSuffix(QCoreApplication.translate("main_window", u"%", None))
-        self.label_9.setText(QCoreApplication.translate("main_window", u"Select Existing Decline Curve", None))
         self.label_8.setText(QCoreApplication.translate("main_window", u"Enter New Decline Curve Name", None))
 #if QT_CONFIG(tooltip)
         self.pushButtonCreateDeclineCurve.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Creates decline curve from current parameters and saves it under the name entered in the box</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButtonCreateDeclineCurve.setText(QCoreApplication.translate("main_window", u"Create New Decline Curve", None))
+        self.label_9.setText(QCoreApplication.translate("main_window", u"Oil Decline Curves", None))
+        self.label_24.setText(QCoreApplication.translate("main_window", u"Gas Decline Curves", None))
+#if QT_CONFIG(tooltip)
+        self.checkBox.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Check this to use the Oil Decline Curve with the Remove, Plot, or Delete buttons</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.checkBox.setText(QCoreApplication.translate("main_window", u"Use Selected Oil Decline Curve", None))
+#if QT_CONFIG(tooltip)
+        self.checkBox_2.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Check this to use the Gas Decline Curve with the Remove, Plot, or Delete buttons</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.checkBox_2.setText(QCoreApplication.translate("main_window", u"Use Selected Gas Decline Curve", None))
 #if QT_CONFIG(tooltip)
         self.pushButtonRemoveDeclineCurves.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Removes the decline curves from the plot, but does not delete them form the application</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButtonRemoveDeclineCurves.setText(QCoreApplication.translate("main_window", u"Remove Decline Curve", None))
+        self.pushButtonRemoveDeclineCurves.setText(QCoreApplication.translate("main_window", u"Remove Decline Curves", None))
 #if QT_CONFIG(tooltip)
         self.pushButtonPlotDeclineCurve.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Plots selected decline curve if it already exists</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButtonPlotDeclineCurve.setText(QCoreApplication.translate("main_window", u"Plot Decline Curve", None))
+        self.pushButtonPlotDeclineCurve.setText(QCoreApplication.translate("main_window", u"Plot Decline Curves", None))
 #if QT_CONFIG(tooltip)
         self.pushButtonDeleteDeclineCurve.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Deletes selected decline curve from the application</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButtonDeleteDeclineCurve.setText(QCoreApplication.translate("main_window", u"Delete Decline Curve", None))
+        self.pushButtonDeleteDeclineCurve.setText(QCoreApplication.translate("main_window", u"Delete Decline Curves", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabProductionPlots), QCoreApplication.translate("main_window", u"Production Plots", None))
         self.groupBoxCashflowSetup.setTitle(QCoreApplication.translate("main_window", u"Cashflow Parameters", None))
+        self.label_11.setText(QCoreApplication.translate("main_window", u"Oil Decline Curve", None))
+        self.label_12.setText(QCoreApplication.translate("main_window", u"Gas Decline Curve", None))
+        self.label_13.setText(QCoreApplication.translate("main_window", u"Beginning of Cashflow", None))
+#if QT_CONFIG(tooltip)
+        self.dateEditCurveStart_2.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Automatically set as first date in production data</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_14.setText(QCoreApplication.translate("main_window", u"Working Interest", None))
+        self.doubleSpinBoxWorkingInterest.setSuffix(QCoreApplication.translate("main_window", u"%", None))
+        self.label_15.setText(QCoreApplication.translate("main_window", u"Net Revenue Interest", None))
+        self.doubleSpinBoxNetRevenueInterest.setSuffix(QCoreApplication.translate("main_window", u"%", None))
+        self.label_16.setText(QCoreApplication.translate("main_window", u"Primary Annual Discout Rate", None))
+        self.spinBoxDiscountRate.setSuffix(QCoreApplication.translate("main_window", u"%", None))
+        self.label_17.setText(QCoreApplication.translate("main_window", u"Severance Tax Rate", None))
+        self.spinBoxSeveranceTax.setSuffix(QCoreApplication.translate("main_window", u"%", None))
+        self.spinBoxSeveranceTax.setPrefix("")
+        self.label_18.setText(QCoreApplication.translate("main_window", u"Flat Oil Price", None))
+        self.doubleSpinBoxOilPrice.setPrefix(QCoreApplication.translate("main_window", u"$", None))
+        self.doubleSpinBoxOilPrice.setSuffix(QCoreApplication.translate("main_window", u"/BBL", None))
+        self.label_19.setText(QCoreApplication.translate("main_window", u"Flat Gas Price", None))
+        self.doubleSpinBoxGasPrice.setPrefix(QCoreApplication.translate("main_window", u"$", None))
+        self.doubleSpinBoxGasPrice.setSuffix(QCoreApplication.translate("main_window", u"/MCF", None))
+        self.label_20.setText(QCoreApplication.translate("main_window", u"Oil Differential", None))
+        self.doubleSpinBoxOilDiff.setPrefix(QCoreApplication.translate("main_window", u"$", None))
+        self.doubleSpinBoxOilDiff.setSuffix(QCoreApplication.translate("main_window", u"/BBL", None))
+        self.label_21.setText(QCoreApplication.translate("main_window", u"Gas Differential", None))
+        self.doubleSpinBoxGasDiff.setPrefix(QCoreApplication.translate("main_window", u"$", None))
+        self.doubleSpinBoxGasDiff.setSuffix(QCoreApplication.translate("main_window", u"/MCF", None))
+        self.label_22.setText(QCoreApplication.translate("main_window", u"OPEX", None))
+        self.spinBoxOPEX.setSuffix(QCoreApplication.translate("main_window", u"/Month", None))
+        self.spinBoxOPEX.setPrefix(QCoreApplication.translate("main_window", u"$", None))
+        self.label_23.setText(QCoreApplication.translate("main_window", u"CAPEX", None))
+        self.doubleSpinBoxCAPEX.setPrefix(QCoreApplication.translate("main_window", u"$", None))
+        self.doubleSpinBoxCAPEX.setSuffix(QCoreApplication.translate("main_window", u" Million", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabCashflowSetup), QCoreApplication.translate("main_window", u"Cashflow Setup", None))
         self.menuFile.setTitle(QCoreApplication.translate("main_window", u"&File", None))
         self.menu_Help.setTitle(QCoreApplication.translate("main_window", u"&Help", None))

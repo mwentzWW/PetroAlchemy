@@ -164,6 +164,16 @@ class MainWindow(QMainWindow):
 
         model_create_decline_curve(self)
 
+        # Production Plot comboboxes
+
+        self.ui.comboBoxOilDeclineCurves.setModel(self.model_oil_curves)
+        self.ui.comboBoxGasDeclineCurves.setModel(self.model_gas_curves)
+
+        # Cashflow comboboxes
+
+        self.ui.comboBoxOilDeclineCurve.setModel(self.model_oil_curves)
+        self.ui.comboBoxGasDeclineCurve.setModel(self.model_gas_curves)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
