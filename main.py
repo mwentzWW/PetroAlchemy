@@ -174,6 +174,45 @@ class MainWindow(QMainWindow):
         self.ui.comboBoxOilDeclineCurve.setModel(self.model_oil_curves)
         self.ui.comboBoxGasDeclineCurve.setModel(self.model_gas_curves)
 
+    def reset_plot(self):
+        """Resets plot with production"""
+
+        well_name = self.ui.comboBoxWellSelect.currentText()
+
+        self.widget_production_plot.plot_production(self, well_name)
+
+    def plot_decline_curves(self):
+        """Plots the selected curves on the plot"""
+
+        # Checks whether to use oil, gas, or both curves
+
+        use_oil = self.ui.checkBoxUseOil.isChecked()
+        use_gas = self.ui.checkBoxUseGas.isChecked()
+
+        oil_curve = self.ui.comboBoxOilDeclineCurves.currentText()
+        gas_curve = self.ui.comboBoxGasDeclineCurves.currentText()
+
+        if use_oil and use_gas:
+
+            model_plot_decline_curve(self, oil_curve, reset=False)
+            model_plot_decline_curve(self, gas_curve, reset=False)
+
+        elif use_oil:
+
+            model_plot_decline_curve(self, oil_curve, reset=False)
+
+        elif use_gas:
+
+            model_plot_decline_curve(self, gas_curve, reset=False)
+
+        else:
+
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText(f"Use the two checkboxes to use the decline curves 👀")
+            msg.setWindowTitle("No Decline Curves Used")
+            msg.exec_()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

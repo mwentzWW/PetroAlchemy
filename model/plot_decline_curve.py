@@ -6,14 +6,20 @@ def plot_decline_curve(parent, curve_name=None, reset=True):
 
     figure = parent.widget_production_plot
 
+    phase = parent.ui.comboBoxPhase.currentText()
+
     if curve_name is None:
-        curve_name = str(parent.ui.comboBoxDeclineCurves.currentText())
+
+        if phase == "oil":
+            curve_name = str(parent.ui.comboBoxOilDeclineCurves.currentText())
+        else:
+            curve_name = str(parent.ui.comboBoxGasDeclineCurves.currentText())
 
     if reset:
         well_name = parent.ui.comboBoxWellSelect.currentText()
         parent.widget_production_plot.plot_production(parent, well_name)
 
-    if parent.ui.comboBoxPhase.currentText() == "Oil":
+    if phase == "Oil":
         color = "g"
         units = "MBO"
         unit_factor = 1_000
