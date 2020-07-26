@@ -31,9 +31,12 @@ from model.create_decline_curve import (
     create_decline_curve as model_create_decline_curve,
 )
 from model.import_data import import_data as model_import_data
+from model.mpl_canvas_widget import DynamicMplCanvas
 from model.plot_decline_curve import plot_decline_curve as model_plot_decline_curve
 from model.plot_production import plot_production as model_plot_production
-from model.mpl_canvas_widget import DynamicMplCanvas
+from model.set_production_widgets import (
+    set_production_widgets as model_set_production_widgets,
+)
 from ui_mainwindow import Ui_main_window
 
 mpl.use("Qt5Agg")
@@ -147,6 +150,14 @@ class MainWindow(QMainWindow):
         self.widget_production_plot.draw()
         self.ui.widgetProductionPlot.update()
         self.widget_production_plot.update()
+
+    @Slot(str)
+    def phase_changed(self, phase):
+        """Updates widgets based on phase selected"""
+
+        well_name = self.ui.comboBoxWellSelect.currentText()
+
+        model_set_production_widgets(self, well_name, phase=phase)
 
     def create_decline_curve(self):
         """Calls create_decline_curve from model/"""

@@ -4,6 +4,10 @@ import matplotlib.dates as mdates
 from matplotlib import pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
 
+from model.set_production_widgets import (
+    set_production_widgets as model_set_production_widgets,
+)
+
 
 def plot_production(self, parent, well_name, init=False):
     """Plot production for current well selected"""
@@ -13,33 +17,13 @@ def plot_production(self, parent, well_name, init=False):
     df_selected = parent.well_dataframes_dict.get(dict_well_name)
 
     if init:
-        # set line edit decline curve name
-
-        parent.ui.lineEditDeclineCurveName.setText(f"{well_name} Oil Decline Curve")
-
         # Set dateEditCurveStart as first date of dataframe
 
         parent.ui.dateEditCurveStart.setDate(df_selected["date"][0])
 
         # set plot widgets with oil early max
 
-        parent.ui.spinBoxRate.setValue(int(df_selected.oil[:6].max()))
-        max_id = df_selected.oil[:6].idxmax()
-
-        if len(df_selected.index) > 11:
-            di_estimate_float = (
-                df_selected["oil"][max_id] - df_selected["oil"][max_id + 12]
-            ) / df_selected["oil"][max_id]
-
-            time_scale = (
-                df_selected["date"][max_id + 12] - df_selected["date"][max_id]
-            ).days
-
-            if time_scale == 365:
-                di_estimate_pct = round(di_estimate_float * 100, 2)
-                parent.ui.doubleSpinBoxDi.setValue(di_estimate_pct)
-        else:
-            parent.ui.doubleSpinBoxDi.setValue(75)
+        model_set_production_widgets(parent, well_name)
 
     # Plot chart
 

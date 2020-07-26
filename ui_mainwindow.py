@@ -951,6 +951,7 @@ class Ui_main_window(object):
         self.pushButtonCreateDeclineCurve.clicked.connect(main_window.create_decline_curve)
         self.actionImport_Data_2.triggered.connect(main_window.import_data)
         self.comboBoxUnits.currentTextChanged.connect(main_window.units_changed)
+        self.comboBoxPhase.currentTextChanged.connect(main_window.phase_changed)
 
         self.tabWidget.setCurrentIndex(0)
 
@@ -1022,5 +1023,8 @@ class Ui_main_window(object):
         self.menuFile.setTitle(QCoreApplication.translate("main_window", u"&File", None))
         self.menu_Help.setTitle(QCoreApplication.translate("main_window", u"&Help", None))
         self.toolBar.setWindowTitle(QCoreApplication.translate("main_window", u"toolBar", None))
+#if QT_CONFIG(tooltip)
+        self.toolBar.setToolTip(QCoreApplication.translate("main_window", u"Tooltip", None))
+#endif // QT_CONFIG(tooltip)
     # retranslateUi
 
