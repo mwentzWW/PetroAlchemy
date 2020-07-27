@@ -61,8 +61,8 @@ def create_decline_curve(parent, curve_name=None):
     parent.decline_curves_dict[curve_name] = df_curve
 
     if curve_phase == "Oil":
-        parent.list_oil_curves.append(curve_name)
+        parent.model_oil_curves.add(curve_name)
     else:
-        parent.list_gas_curves.append(curve_name)
+        parent.model_gas_curves.add(curve_name)
 
     model_plot_decline_curve(parent, curve_name=curve_name)

@@ -30,6 +30,7 @@ import petrolpy_equations.petrolpy_equations as petrolpy
 from model.create_decline_curve import (
     create_decline_curve as model_create_decline_curve,
 )
+from model.custom_models import ListModel
 from model.import_data import import_data as model_import_data
 from model.mpl_canvas_widget import DynamicMplCanvas
 from model.plot_decline_curve import plot_decline_curve as model_plot_decline_curve
@@ -52,12 +53,12 @@ class MainWindow(QMainWindow):
 
         # Application variables
 
-        self.model = QtGui.QStandardItemModel()
+        self.model = ListModel()
         self.well_dataframes_dict = {}
 
         self.decline_curves_dict = {}
-        self.list_oil_curves = []
-        self.list_gas_curves = []
+        self.model_oil_curves = ListModel()
+        self.model_gas_curves = ListModel()
 
         self.widget_production_plot = DynamicMplCanvas(self.ui.widgetProductionPlot)
         toolbar = NavigationToolbar2QT(
@@ -224,25 +225,18 @@ class MainWindow(QMainWindow):
         oil_curve = self.ui.comboBoxOilDeclineCurves.currentText()
         gas_curve = self.ui.comboBoxGasDeclineCurves.currentText()
 
-        oil_curve_index = self.model_oil_curves.indexFromItem(
-            QtGui.QStandardItem(oil_curve)
-        )
-        gas_curve_index = self.model_gas_curves.indexFromItem(
-            QtGui.QStandardItem(gas_curve)
-        )
-
         if use_oil and use_gas:
 
-            del self.model_oil_curves[oil_curve_index.row()]
-            del self.model_gas_curves[gas_curve_index.row()]
+            self.model_oil_curves.delete(oil_curve)
+            self.model_gas_curves.delete(gas_curve)
 
         elif use_oil:
 
-            del self.model_oil_curves[oil_curve_index.row()]
+            self.model_oil_curves.delete(oil_curve)
 
         elif use_gas:
 
-            del self.model_gas_curves[gas_curve_index.row()]
+            self.model_gas_curves.delete(gas_curve)
 
         else:
 

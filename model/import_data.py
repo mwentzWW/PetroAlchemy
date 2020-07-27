@@ -51,12 +51,9 @@ def import_data(self):
 
             # checks if the exact well name is already in the model
 
-            matches = self.model.findItems(well_name, QtCore.Qt.MatchExactly)
+            if well_name not in self.model.list:
 
-            if not matches:
-
-                well_item = QtGui.QStandardItem(well_name)
-                self.model.appendRow(well_item)
+                self.model.add(well_name)
 
                 dict_well_name = well_name.replace(" ", "_")
                 self.well_dataframes_dict[dict_well_name] = df.loc[

@@ -1181,6 +1181,7 @@ class Ui_main_window(object):
         self.comboBoxPhase.currentTextChanged.connect(main_window.phase_changed)
         self.pushButtonRemoveDeclineCurves.clicked.connect(main_window.reset_plot)
         self.pushButtonPlotDeclineCurve.clicked.connect(main_window.plot_decline_curves)
+        self.pushButtonDeleteDeclineCurve.clicked.connect(main_window.delete_decline_curves)
 
         self.tabWidget.setCurrentIndex(0)
 
