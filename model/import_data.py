@@ -69,6 +69,7 @@ def import_data(self):
                 msg.setText(f"{well_name} already exists, check the file and try again")
                 msg.setWindowTitle("Import Failed")
                 msg.exec_()
+                return
 
     if wells_total > 1:
         msg = QMessageBox()
