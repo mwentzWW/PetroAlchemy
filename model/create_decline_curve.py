@@ -60,11 +60,9 @@ def create_decline_curve(parent, curve_name=None):
 
     parent.decline_curves_dict[curve_name] = df_curve
 
-    qt_curve_name = QtGui.QStandardItem(curve_name)
-
     if curve_phase == "Oil":
-        parent.model_oil_curves.appendRow(qt_curve_name)
+        parent.list_oil_curves.append(curve_name)
     else:
-        parent.model_gas_curves.appendRow(qt_curve_name)
+        parent.list_gas_curves.append(curve_name)
 
     model_plot_decline_curve(parent, curve_name=curve_name)

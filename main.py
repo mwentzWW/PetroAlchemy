@@ -56,8 +56,8 @@ class MainWindow(QMainWindow):
         self.well_dataframes_dict = {}
 
         self.decline_curves_dict = {}
-        self.model_oil_curves = QtGui.QStandardItemModel()
-        self.model_gas_curves = QtGui.QStandardItemModel()
+        self.list_oil_curves = []
+        self.list_gas_curves = []
 
         self.widget_production_plot = DynamicMplCanvas(self.ui.widgetProductionPlot)
         toolbar = NavigationToolbar2QT(
@@ -204,6 +204,45 @@ class MainWindow(QMainWindow):
         elif use_gas:
 
             model_plot_decline_curve(self, gas_curve, reset=False)
+
+        else:
+
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText(f"Use the two checkboxes to use the decline curves 👀")
+            msg.setWindowTitle("No Decline Curves Used")
+            msg.exec_()
+
+    def delete_decline_curves(self):
+        """Deletes the selected curves on the plot"""
+
+        # Checks whether to use oil, gas, or both curves
+
+        use_oil = self.ui.checkBoxUseOil.isChecked()
+        use_gas = self.ui.checkBoxUseGas.isChecked()
+
+        oil_curve = self.ui.comboBoxOilDeclineCurves.currentText()
+        gas_curve = self.ui.comboBoxGasDeclineCurves.currentText()
+
+        oil_curve_index = self.model_oil_curves.indexFromItem(
+            QtGui.QStandardItem(oil_curve)
+        )
+        gas_curve_index = self.model_gas_curves.indexFromItem(
+            QtGui.QStandardItem(gas_curve)
+        )
+
+        if use_oil and use_gas:
+
+            del self.model_oil_curves[oil_curve_index.row()]
+            del self.model_gas_curves[gas_curve_index.row()]
+
+        elif use_oil:
+
+            del self.model_oil_curves[oil_curve_index.row()]
+
+        elif use_gas:
+
+            del self.model_gas_curves[gas_curve_index.row()]
 
         else:
 
