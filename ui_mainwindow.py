@@ -657,8 +657,8 @@ class Ui_main_window(object):
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setStyleSheet(u"aqua")
-        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.gridLayout_2 = QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.comboBoxWellSelect = QComboBox(self.centralwidget)
         self.comboBoxWellSelect.setObjectName(u"comboBoxWellSelect")
         self.comboBoxWellSelect.setMaximumSize(QSize(300, 16777215))
@@ -668,7 +668,7 @@ class Ui_main_window(object):
         self.comboBoxWellSelect.setFont(font1)
         self.comboBoxWellSelect.setMaxVisibleItems(25)
 
-        self.verticalLayout_2.addWidget(self.comboBoxWellSelect)
+        self.gridLayout_2.addWidget(self.comboBoxWellSelect, 0, 0, 1, 1)
 
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
@@ -930,14 +930,16 @@ class Ui_main_window(object):
         self.tabCashflowSetup = QWidget()
         self.tabCashflowSetup.setObjectName(u"tabCashflowSetup")
         self.tabCashflowSetup.setFont(font6)
+        self.gridLayout_3 = QGridLayout(self.tabCashflowSetup)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.groupBoxCashflowSetup = QGroupBox(self.tabCashflowSetup)
         self.groupBoxCashflowSetup.setObjectName(u"groupBoxCashflowSetup")
-        self.groupBoxCashflowSetup.setGeometry(QRect(10, 10, 611, 431))
         sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        sizePolicy2.setHorizontalStretch(1)
+        sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.groupBoxCashflowSetup.sizePolicy().hasHeightForWidth())
         self.groupBoxCashflowSetup.setSizePolicy(sizePolicy2)
+        self.groupBoxCashflowSetup.setMinimumSize(QSize(600, 0))
         self.groupBoxCashflowSetup.setFont(font3)
         self.formLayout = QFormLayout(self.groupBoxCashflowSetup)
         self.formLayout.setObjectName(u"formLayout")
@@ -978,13 +980,13 @@ class Ui_main_window(object):
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_13)
 
-        self.dateEditCurveStart_2 = QDateEdit(self.groupBoxCashflowSetup)
-        self.dateEditCurveStart_2.setObjectName(u"dateEditCurveStart_2")
-        self.dateEditCurveStart_2.setFont(font1)
-        self.dateEditCurveStart_2.setCalendarPopup(True)
-        self.dateEditCurveStart_2.setDate(QDate(2020, 1, 1))
+        self.dateEditCashflowStart = QDateEdit(self.groupBoxCashflowSetup)
+        self.dateEditCashflowStart.setObjectName(u"dateEditCashflowStart")
+        self.dateEditCashflowStart.setFont(font1)
+        self.dateEditCashflowStart.setCalendarPopup(True)
+        self.dateEditCashflowStart.setDate(QDate(2020, 1, 1))
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.dateEditCurveStart_2)
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.dateEditCashflowStart)
 
         self.label_14 = QLabel(self.groupBoxCashflowSetup)
         self.label_14.setObjectName(u"label_14")
@@ -1123,11 +1125,34 @@ class Ui_main_window(object):
 
         self.formLayout.setWidget(12, QFormLayout.FieldRole, self.doubleSpinBoxCAPEX)
 
+        self.pushButtonCreateCashflow = QPushButton(self.groupBoxCashflowSetup)
+        self.pushButtonCreateCashflow.setObjectName(u"pushButtonCreateCashflow")
+        self.pushButtonCreateCashflow.setFont(font1)
         icon4 = QIcon()
-        icon4.addFile(u"resources/4288564 - banking business cash income money.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.tabWidget.addTab(self.tabCashflowSetup, icon4, "")
+        icon4.addFile(u"resources/4288590 - objective sight target view vision.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pushButtonCreateCashflow.setIcon(icon4)
 
-        self.verticalLayout_2.addWidget(self.tabWidget)
+        self.formLayout.setWidget(13, QFormLayout.FieldRole, self.pushButtonCreateCashflow)
+
+
+        self.gridLayout_3.addWidget(self.groupBoxCashflowSetup, 0, 0, 1, 1)
+
+        self.tableViewCashflow = QTableView(self.tabCashflowSetup)
+        self.tableViewCashflow.setObjectName(u"tableViewCashflow")
+        self.tableViewCashflow.setMinimumSize(QSize(800, 800))
+        self.tableViewCashflow.setSortingEnabled(False)
+        self.tableViewCashflow.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableViewCashflow.horizontalHeader().setMinimumSectionSize(150)
+        self.tableViewCashflow.horizontalHeader().setDefaultSectionSize(200)
+        self.tableViewCashflow.horizontalHeader().setStretchLastSection(True)
+
+        self.gridLayout_3.addWidget(self.tableViewCashflow, 0, 1, 1, 1)
+
+        icon5 = QIcon()
+        icon5.addFile(u"resources/4288564 - banking business cash income money.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.tabWidget.addTab(self.tabCashflowSetup, icon5, "")
+
+        self.gridLayout_2.addWidget(self.tabWidget, 1, 0, 1, 1)
 
         main_window.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(main_window)
@@ -1182,6 +1207,7 @@ class Ui_main_window(object):
         self.pushButtonRemoveDeclineCurves.clicked.connect(main_window.reset_plot)
         self.pushButtonPlotDeclineCurve.clicked.connect(main_window.plot_decline_curves)
         self.pushButtonDeleteDeclineCurve.clicked.connect(main_window.delete_decline_curves)
+        self.pushButtonCreateCashflow.clicked.connect(main_window.create_cashflow)
 
         self.tabWidget.setCurrentIndex(0)
 
@@ -1262,7 +1288,7 @@ class Ui_main_window(object):
         self.label_12.setText(QCoreApplication.translate("main_window", u"Gas Decline Curve", None))
         self.label_13.setText(QCoreApplication.translate("main_window", u"Beginning of Cashflow", None))
 #if QT_CONFIG(tooltip)
-        self.dateEditCurveStart_2.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Automatically set as first date in production data</p></body></html>", None))
+        self.dateEditCashflowStart.setToolTip(QCoreApplication.translate("main_window", u"<html><head/><body><p>Automatically set as first date in production data</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_14.setText(QCoreApplication.translate("main_window", u"Working Interest", None))
         self.doubleSpinBoxWorkingInterest.setSuffix(QCoreApplication.translate("main_window", u"%", None))
@@ -1291,6 +1317,7 @@ class Ui_main_window(object):
         self.label_23.setText(QCoreApplication.translate("main_window", u"CAPEX", None))
         self.doubleSpinBoxCAPEX.setPrefix(QCoreApplication.translate("main_window", u"$", None))
         self.doubleSpinBoxCAPEX.setSuffix(QCoreApplication.translate("main_window", u" Million", None))
+        self.pushButtonCreateCashflow.setText(QCoreApplication.translate("main_window", u"Create Cashflow", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabCashflowSetup), QCoreApplication.translate("main_window", u"Cashflow Setup", None))
         self.menuFile.setTitle(QCoreApplication.translate("main_window", u"&File", None))
         self.menu_Help.setTitle(QCoreApplication.translate("main_window", u"&Help", None))

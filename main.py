@@ -30,7 +30,7 @@ import petrolpy_equations.petrolpy_equations as petrolpy
 from model.create_decline_curve import (
     create_decline_curve as model_create_decline_curve,
 )
-from model.custom_models import ListModel
+from model.custom_models import ListModel, TableModel
 from model.import_data import import_data as model_import_data
 from model.mpl_canvas_widget import DynamicMplCanvas
 from model.plot_decline_curve import plot_decline_curve as model_plot_decline_curve
@@ -38,6 +38,7 @@ from model.plot_production import plot_production as model_plot_production
 from model.set_production_widgets import (
     set_production_widgets as model_set_production_widgets,
 )
+from model.cashflow import create_cashflow as model_create_cashflow
 from ui_mainwindow import Ui_main_window
 
 mpl.use("Qt5Agg")
@@ -59,6 +60,13 @@ class MainWindow(QMainWindow):
         self.decline_curves_dict = {}
         self.model_oil_curves = ListModel()
         self.model_gas_curves = ListModel()
+
+        # Cashflow models
+
+        self.model_cashflow_monthly = TableModel()
+        self.model_cashflow_annual = TableModel()
+
+        # Production Plot setup
 
         self.widget_production_plot = DynamicMplCanvas(self.ui.widgetProductionPlot)
         toolbar = NavigationToolbar2QT(
@@ -175,6 +183,9 @@ class MainWindow(QMainWindow):
         self.ui.comboBoxOilDeclineCurve.setModel(self.model_oil_curves)
         self.ui.comboBoxGasDeclineCurve.setModel(self.model_gas_curves)
 
+        self.model_oil_curves.layoutChanged.emit()
+        self.model_gas_curves.layoutChanged.emit()
+
     def reset_plot(self):
         """Resets plot with production"""
 
@@ -250,6 +261,13 @@ class MainWindow(QMainWindow):
             msg.setText(f"Use the two checkboxes to use the decline curves 👀")
             msg.setWindowTitle("No Decline Curves Used")
             msg.exec_()
+
+    def create_cashflow(self):
+        """Creates cashflow from setup page inputs"""
+
+        model_create_cashflow(self)
+
+        self.ui.tableViewCashflow.setModel(self.model_cashflow_monthly)
 
 
 if __name__ == "__main__":
