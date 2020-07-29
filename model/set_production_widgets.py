@@ -5,6 +5,11 @@ def set_production_widgets(parent, well_name, phase="Oil"):
 
     df_selected = parent.well_dataframes_dict.get(dict_well_name)
 
+    if df_selected is None:
+        # True on application start
+
+        return
+
     parent.ui.lineEditDeclineCurveName.setText(f"{well_name} {phase} Decline Curve")
 
     phase_lower = phase.lower()
