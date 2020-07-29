@@ -228,15 +228,20 @@ class MainWindow(QMainWindow):
         if use_oil and use_gas:
 
             self.model_oil_curves.delete(oil_curve)
+            del self.decline_curves_dict[oil_curve]
+
             self.model_gas_curves.delete(gas_curve)
+            del self.decline_curves_dict[oil_curve]
 
         elif use_oil:
 
             self.model_oil_curves.delete(oil_curve)
+            del self.decline_curves_dict[oil_curve]
 
         elif use_gas:
 
             self.model_gas_curves.delete(gas_curve)
+            del self.decline_curves_dict[oil_curve]
 
         else:
 
