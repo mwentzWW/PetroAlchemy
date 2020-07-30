@@ -65,7 +65,7 @@ def plot_decline_curve(parent, curve_name=None, reset=True):
 
     text_box_props = dict(boxstyle="round", facecolor="white")
     text_box = figure.axes.text(
-        0.85,
+        0.75,
         0.95,
         textstr,
         transform=figure.axes.transAxes,

@@ -1213,7 +1213,6 @@ class Ui_main_window(object):
         self.menu_Help.addSeparator()
         self.menu_Help.addAction(self.actionContact_project_creator)
         self.menu_View.addAction(self.actionComing_Soon)
-        self.menu_About.addAction(self.actionCheck_for_updates)
         self.menu_About.addAction(self.actionCurrent_Version)
         self.menu_About.addSeparator()
         self.menu_About.addAction(self.actionTake_survey_to_improve_the_project)
@@ -1240,7 +1239,6 @@ class Ui_main_window(object):
         self.pushButtonPlotDeclineCurve.clicked.connect(main_window.plot_decline_curves)
         self.pushButtonDeleteDeclineCurve.clicked.connect(main_window.delete_decline_curves)
         self.pushButtonCreateCashflow.clicked.connect(main_window.create_cashflow)
-        self.actionCheck_for_updates.triggered.connect(main_window.about_check_for_updates)
         self.actionDonate.triggered.connect(main_window.about_donate)
 
         self.tabWidget.setCurrentIndex(0)
