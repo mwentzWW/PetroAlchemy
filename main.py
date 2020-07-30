@@ -27,6 +27,7 @@ from PySide2.QtWidgets import (
 
 import eia_data.commodity_prices as prices
 import petrolpy_equations.petrolpy_equations as petrolpy
+from model.cashflow import create_cashflow as model_create_cashflow
 from model.create_decline_curve import (
     create_decline_curve as model_create_decline_curve,
 )
@@ -38,12 +39,11 @@ from model.plot_production import plot_production as model_plot_production
 from model.set_production_widgets import (
     set_production_widgets as model_set_production_widgets,
 )
-from model.cashflow import create_cashflow as model_create_cashflow
 from ui_mainwindow import Ui_main_window
 
 mpl.use("Qt5Agg")
 
-VERSION = "0.3.0"
+VERSION = "0.3.0-beta"
 
 
 class MainWindow(QMainWindow):
@@ -81,15 +81,6 @@ class MainWindow(QMainWindow):
 
         self.ui.comboBoxPhase.addItems(["Oil", "Gas"])
         self.ui.comboBoxUnits.addItems(["BOPM/MCFPM", "BOPD/MCFPD"])
-
-    def help_version(self):
-        """Message with current version info"""
-
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Information)
-        msg.setText(f"💻 Version installed: {VERSION}")
-        msg.setWindowTitle("Current Version")
-        msg.exec_()
 
     def help_tutorial(self):
         """Open tutorial from Read the Docs"""
@@ -132,10 +123,24 @@ class MainWindow(QMainWindow):
 
         webbrowser.open("https://www.linkedin.com/in/mwentzww/")
 
-    def help_take_survey(self):
+    def about_version(self):
+        """Message with current version info"""
+
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText(f"💻 Version installed: {VERSION}")
+        msg.setWindowTitle("Current Version")
+        msg.exec_()
+
+    def about_take_survey(self):
         """Open survey"""
 
         webbrowser.open("https://www.surveymonkey.com/r/F22RYZ5")
+
+    def about_donate(self):
+        """Open paypal link"""
+
+        webbrowser.open("https://paypal.me/MichaelWentz")
 
     def import_data(self):
         model_import_data(self)
