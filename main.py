@@ -276,6 +276,20 @@ class MainWindow(QMainWindow):
         self.ui.tableViewCashflow.setModel(self.model_cashflow_monthly)
         self.ui.tableViewSummaryValues.setModel(self.model_cashflow_summary)
 
+    def save_cashflow(self):
+        """Save cashflow and summary output to excel"""
+
+        fileName = QFileDialog.getSaveFileName(self, "Save Cashflow to Excel")[0]
+
+        with pd.ExcelWriter(fileName) as writer:
+
+            self.df_summary_output.to_excel(
+                writer, sheet_name="PetroAlchemy Summary Output", index=False
+            )
+            self.df_cashflow_monthly.to_excel(
+                writer, sheet_name="PetroAlchemy Cashflow"
+            )
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -226,44 +226,22 @@ def create_cashflow(self):
     self.model_cashflow_summary = TableModel(summary_df)
     self.model_cashflow_summary.layoutChanged.emit()
 
+    # Summary df to save to excel
 
-#     # Summary df to save to excel
+    data_dict = {
+        "Economic Life (Years)": econ_life_years,
+        "NPV of Selected Rate (M$)": npv_rate,
+        "Internal Rate of Return": irr_annual,
+        "Payout (Years)": payout_years,
+        "Return on Investment": roi,
+        "Discounted Return on Investment": dcf_roi,
+        "NPV8 (M$)": self.npv_values[0],
+        "NPV10 (M$)": self.npv_values[1],
+        "NPV15 (M$)": self.npv_values[2],
+        "NPV20 (M$)": self.npv_values[3],
+        "NPV25 (M$)": self.npv_values[4],
+        "NPV30 (M$)": self.npv_values[5],
+    }
 
-#     data_dict = {
-#         "Economic Life (Years)": econ_life_years,
-#         "NPV of Selected Rate (M$)": npv_rate,
-#         "Internal Rate of Return": irr_annual,
-#         "Payout (Years)": payout_years,
-#         "Return on Investment": roi,
-#         "Discounted Return on Investment": dcf_roi,
-#         "NPV8 (M$)": npv_values[0],
-#         "NPV10 (M$)": npv_values[1],
-#         "NPV15 (M$)": npv_values[2],
-#         "NPV20 (M$)": npv_values[3],
-#         "NPV25 (M$)": npv_values[4],
-#         "NPV30 (M$)": npv_values[5],
-#     }
-
-#     self.df_summary_output = pd.DataFrame(data_dict, index=["Values"])
-
-#     # Output cashflow to text
-
-#     self.controller.children["!frame"].children[
-#         "!cashflowoutputpage"
-#     ].cashflow_to_text(df=df_cashflow)
-
-# def save_cashflow(self):
-#     """Save cashflow and summary output to excel"""
-
-#     save_as = tk.filedialog.asksaveasfilename(
-#         filetypes=[("Excel files", ".xlsx .xls")], defaultextension=".xlsx"
-#     )
-
-#     with pd.ExcelWriter(save_as, engine="xlsxwriter") as writer:
-
-#         self.df_summary_output.to_excel(
-#             writer, sheet_name="PetroBase Summary Output", index=False
-#         )
-#         self.df_cashflow.to_excel(
-#             writer, sheet_name="PetroBase Cashflow", index=False
-#         )
+    self.df_cashflow_monthly = df_cashflow_monthly
+    self.df_summary_output = pd.DataFrame(data_dict, index=["Values"])
