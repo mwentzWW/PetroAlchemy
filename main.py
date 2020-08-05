@@ -65,6 +65,7 @@ class MainWindow(QMainWindow):
 
         self.model_cashflow_monthly = TableModel()
         self.model_cashflow_annual = TableModel()
+        self.model_cashflow_summary = TableModel()
 
         # Production Plot setup
 
@@ -273,6 +274,7 @@ class MainWindow(QMainWindow):
         model_create_cashflow(self)
 
         self.ui.tableViewCashflow.setModel(self.model_cashflow_monthly)
+        self.ui.tableViewSummaryValues.setModel(self.model_cashflow_summary)
 
 
 if __name__ == "__main__":
