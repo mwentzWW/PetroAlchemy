@@ -64,7 +64,11 @@ class TableModel(QtCore.QAbstractTableModel):
 
             if isinstance(value, int):
 
-                return f"{value:,}"
+                return f"{value}"
+
+            if isinstance(value, str):
+
+                return value
 
         if role == Qt.TextAlignmentRole:
 
