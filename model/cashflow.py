@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 from petrolpy_equations import petrolpy_equations as petrolpy
 from model.custom_models import TableModel
@@ -124,10 +125,6 @@ def create_cashflow(self):
 
     npv_rate = df_cashflow["Discounted Net Revenue (M$)"].sum()
 
-    # drop months column, 1 is for columns
-
-    df_cashflow.drop("Month", 1, inplace=True)
-
     # Store current cashflow dataframe to Mainwindow class, group by month in case decline curve is daily data
 
     df_cashflow_monthly = df_cashflow.groupby(pd.Grouper(freq="M")).sum().reset_index()
@@ -138,123 +135,97 @@ def create_cashflow(self):
     df_cashflow_annual["index"] = df_cashflow_annual["index"].dt.strftime("%m-%d-%Y")
     df_cashflow_annual.set_index("index", inplace=True)
 
+    # -----------------Summary Values-----------------
+
+    # Economic Life cutoff
+
+    try:
+        max_cumulative_net_revenue = df_cashflow_monthly[
+            df_cashflow_monthly["Cumulative Net Revenue (M$)"]
+            == df_cashflow_monthly["Cumulative Net Revenue (M$)"].max()
+        ]
+        econ_life_years = round(max_cumulative_net_revenue["delta_time_yrs"][0], 1)
+
+    except IndexError:
+        # Error ocurrs when Net Revenue is never positive
+        econ_life_years = 0
+
+    # IRR, ROI, DROI as %
+
+    irr_annual = petrolpy.irr(df_cashflow_monthly["Net Revenue (M$)"], monthly=True)
+
+    roi = df_cashflow_monthly["Net Revenue (M$)"].sum() / (capex * 1000)
+    dcf_roi = npv_rate / (capex * 1000)
+
+    # NPV8, NPV10, NPV15, NPV20, NPV25, NPV30, stored to app to plot later in analysis
+
+    self.npv_rates = [8, 10, 15, 20, 25, 30]
+    self.npv_values = []
+
+    for rate in self.npv_rates:
+
+        monthly_disc_rate = petrolpy.ann_to_monthly_disc_rate(rate / 100)
+
+        df_cashflow_monthly[f"NPV{rate} (M$)"] = df_cashflow_monthly[
+            "Net Revenue (M$)"
+        ] * (1 / ((1 + monthly_disc_rate) ** (df_cashflow_monthly["Month"] - 1)))
+        npv_sum = df_cashflow_monthly[f"NPV{rate} (M$)"].sum()
+        self.npv_values.append(npv_sum)
+
+    # Payout
+
+    try:
+        payout_month = df_cashflow_monthly[
+            df_cashflow_monthly["Cumulative Net Revenue (M$)"] > 0
+        ].min()
+        payout_years = round(payout_month["delta_time_yrs"], 1)
+
+    except IndexError:
+        # Error ocurrs when Cumulative Net Revenue is never positive
+        payout_years = "Infinite"
+
+    # 1 year EUR,  5 (60 months) year EUR, 50 (600 months) year EUR
+
+    oil_eur_1 = int(df_cashflow_annual["Gross Oil"][0].sum() / 1_000)
+    oil_eur_5 = int(df_cashflow_annual["Gross Oil"][:4].sum() / 1_000)
+    oil_eur_50 = int(df_cashflow_annual["Gross Oil"][:49].sum() / 1_000)
+
+    gas_eur_1 = round(df_cashflow_annual["Gross Gas"][0].sum() / 1_000_000, 1)
+    gas_eur_5 = round(df_cashflow_annual["Gross Gas"][:4].sum() / 1_000_000, 1)
+    gas_eur_50 = round(df_cashflow_annual["Gross Gas"][:49].sum() / 1_000_000, 1)
+
+    eur_data = (
+        ("1 Year EUR", f"{oil_eur_1:,} MBO & {gas_eur_1} BCF"),
+        ("5 Year EUR", f"{oil_eur_5:,} MBO & {gas_eur_5} BCF"),
+        ("50 Year EUR", f"{oil_eur_50:,} MBO & {gas_eur_50} BCF"),
+    )
+
+    # Summary data to display
+
+    summary_data = {
+        "Economic Life": f"{econ_life_years} Years",
+        "NPV of Primary Rate": f"{npv_rate:,.0f} M$",
+        "Internal Rate of Return": f"{irr_annual:.0%}",
+        "Payout": f"{payout_years} Years",
+        "Return on Investment": f"{roi:.0%}",
+        "Discounted Return on Investment": f"{dcf_roi:.0%}",
+    }
+
+    summary_df = pd.DataFrame.from_dict(summary_data, orient="index")
+    summary_df.rename(columns={summary_df.columns[0]: "Values"}, inplace=True)
+
+    df_cashflow_monthly.drop(["Month"], axis=1, inplace=True)
+
+    # Update Models
+
     self.model_cashflow_monthly = TableModel(df_cashflow_monthly)
     self.model_cashflow_monthly.layoutChanged.emit()
     self.model_cashflow_annual = TableModel(df_cashflow_annual)
     self.model_cashflow_annual.layoutChanged.emit()
 
-    # Annual Net Revenue
+    self.model_cashflow_summary = TableModel(summary_df)
+    self.model_cashflow_summary.layoutChanged.emit()
 
-
-#     ann_net_revenue = (
-#         df_cashflow_annual["Net Revenue (M$)"]
-#     )
-
-#     # Summary Values
-
-#     # Economic Life cutoff
-
-#     try:
-#         econ_life_years = round(
-#             float(
-#                 (df_cashflow_monthly[df_cashflow_monthly["Net Revenue (M$)"] > 0].index[-1] + 1)
-#                 / 12
-#             ),
-#             1,
-#         )
-#     except IndexError:
-#         # Error ocurrs when Net Revenue is never positive
-#         econ_life_years = 0
-
-#     # IRR, ROI, DROI as %
-
-#     irr_annual = petrolpy.irr(df_cashflow_monthly["Net Revenue (M$)"], monthly=True)
-
-#     roi = df_cashflow_monthly["Net Revenue (M$)"].sum() / (capex * 1000)
-#     dcf_roi = npv_rate / (capex * 1000)
-
-#     # NPV8, NPV10, NPV15, NPV20, NPV25, NPV30
-
-#     rates = [8, 10, 15, 20, 25, 30]
-#     npv_data = []
-#     npv_values = []
-
-#     for rate in rates:
-
-#         monthly_disc_rate = petrolpy.ann_to_monthly_disc_rate(rate / 100)
-
-#         df_cashflow_monthly[f"NPV{rate} (M$)"] = df_cashflow_monthly["Net Revenue (M$)"] * (
-#             1 / ((1 + monthly_disc_rate) ** (df_cashflow_monthly["Month"] - 1))
-#         )
-#         npv_sum = df_cashflow_monthly[f"NPV{rate} (M$)"].sum()
-#         npv_data.append((f"NPV{rate}", f"{npv_sum:,.0f} M$"))
-#         npv_values.append(npv_sum)
-
-#     # Payout
-
-#     try:
-#         payout_years = round(
-#             float(
-#                 (
-#                     df_cashflow_monthly[
-#                         df_cashflow_monthly["Cumulative Net Revenue (M$)"] > 0
-#                     ].index[0]
-#                     + 1
-#                 )
-#                 / 12
-#             ),
-#             1,
-#         )
-
-#     except IndexError:
-#         # Error ocurrs when Cumulative Net Revenue is never positive
-#         payout_years = "Infinite"
-
-#     # 1 year EUR,  5 (60 months) year EUR, 50 (600 months) year EUR
-
-#     oil_eur_1 = int(df_cashflow_annual["Gross Oil"][0].sum() / 1_000)
-#     oil_eur_5 = int(df_cashflow_annual["Gross Oil"][:4].sum() / 1_000)
-#     oil_eur_50 = int(df_cashflow_annual["Gross Oil"][:49].sum() / 1_000)
-
-#     gas_eur_1 = round(df_cashflow_annual["Gross Gas"][0].sum() / 1_000_000, 1)
-#     gas_eur_5 = round(df_cashflow_annual["Gross Gas"][:4].sum() / 1_000_000, 1)
-#     gas_eur_50 = round(df_cashflow_annual["Gross Gas"][:49].sum()/ 1_000_000, 1)
-
-#     eur_data = (
-#         ("1 Year EUR", f"{oil_eur_1:,} MBO & {gas_eur_1} BCF"),
-#         ("5 Year EUR", f"{oil_eur_5:,} MBO & {gas_eur_5} BCF"),
-#         ("50 Year EUR", f"{oil_eur_50:,} MBO & {gas_eur_50} BCF"),
-#     )
-
-#     # Summary data to display
-
-#     summary_data = (
-#         ("Economic Life", f"{econ_life_years} Years"),
-#         ("NPV of Selected Rate", f"{npv_rate:,.0f} M$"),
-#         ("Internal Rate of Return", f"{irr_annual:.0%}"),
-#         ("Payout", f"{payout_years} Years"),
-#         ("Return on Investment", f"{roi:.0%}"),
-#         ("Discounted Return on Investment", f"{dcf_roi:.0%}"),
-#     )
-
-#     self.treeview_summary.delete(*self.treeview_summary.get_children())
-#     for index, row in enumerate(summary_data):
-
-#         self.treeview_summary.insert("", index, index, values=row)
-
-#     # Discount rate values to display
-
-#     self.treeview_discount.delete(*self.treeview_discount.get_children())
-#     for index, row in enumerate(npv_data):
-
-#         self.treeview_discount.insert("", index, index, values=row)
-
-#     # EUR values to display
-
-#     self.treeview_eur.delete(*self.treeview_eur.get_children())
-#     for index, row in enumerate(eur_data):
-
-#         self.treeview_eur.insert("", index, index, values=row)
 
 #     # Summary df to save to excel
 
