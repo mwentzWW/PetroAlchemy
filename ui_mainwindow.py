@@ -953,19 +953,6 @@ class Ui_main_window(object):
         self.tabCashflow.setFont(font)
         self.gridLayout_3 = QGridLayout(self.tabCashflow)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.tableViewCashflow = QTableView(self.tabCashflow)
-        self.tableViewCashflow.setObjectName(u"tableViewCashflow")
-        self.tableViewCashflow.setMinimumSize(QSize(800, 800))
-        self.tableViewCashflow.setFont(font)
-        self.tableViewCashflow.setAlternatingRowColors(True)
-        self.tableViewCashflow.setSortingEnabled(False)
-        self.tableViewCashflow.horizontalHeader().setCascadingSectionResizes(True)
-        self.tableViewCashflow.horizontalHeader().setMinimumSectionSize(150)
-        self.tableViewCashflow.horizontalHeader().setDefaultSectionSize(200)
-        self.tableViewCashflow.horizontalHeader().setStretchLastSection(True)
-
-        self.gridLayout_3.addWidget(self.tableViewCashflow, 0, 2, 1, 1)
-
         self.groupBoxCashflowSetup = QGroupBox(self.tabCashflow)
         self.groupBoxCashflowSetup.setObjectName(u"groupBoxCashflowSetup")
         sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -1169,6 +1156,21 @@ class Ui_main_window(object):
 
 
         self.gridLayout_3.addWidget(self.groupBoxCashflowSetup, 0, 0, 1, 1)
+
+        self.tableViewCashflow = QTableView(self.tabCashflow)
+        self.tableViewCashflow.setObjectName(u"tableViewCashflow")
+        sizePolicy1.setHeightForWidth(self.tableViewCashflow.sizePolicy().hasHeightForWidth())
+        self.tableViewCashflow.setSizePolicy(sizePolicy1)
+        self.tableViewCashflow.setMinimumSize(QSize(200, 700))
+        self.tableViewCashflow.setFont(font)
+        self.tableViewCashflow.setAlternatingRowColors(True)
+        self.tableViewCashflow.setSortingEnabled(False)
+        self.tableViewCashflow.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableViewCashflow.horizontalHeader().setMinimumSectionSize(150)
+        self.tableViewCashflow.horizontalHeader().setDefaultSectionSize(200)
+        self.tableViewCashflow.horizontalHeader().setStretchLastSection(True)
+
+        self.gridLayout_3.addWidget(self.tableViewCashflow, 0, 1, 1, 1)
 
         self.widget = QWidget(self.tabCashflow)
         self.widget.setObjectName(u"widget")
