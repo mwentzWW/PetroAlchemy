@@ -1,6 +1,7 @@
 # PetroAlchemy
 [![Documentation Status](https://readthedocs.org/projects/petroalchemy/badge/?version=latest)](https://petroalchemy.readthedocs.io/en/latest/?badge=latest)
 [![Latest Version](https://img.shields.io/github/v/release/mwentzWW/PetroAlchemy?include_prereleases)](https://github.com/mwentzWW/PetroAlchemy/releases)
+![Downloads](https://img.shields.io/github/downloads/mwentzWW/PetroAlchemy/total)
 
 Open source petroleum forecasting and financial tool.
 
