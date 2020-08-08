@@ -14,15 +14,17 @@ PetroAlchemy is free to use and will never require you to purchase a license or 
 
 ## Installation
 
-| System            | Download                                                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Windows 10 64-bit | [PetroAlchemy-0.2.0-amd64.msi](https://github.com/mwentzWW/PetroAlchemy/releases/download/v0.2.0/PetroAlchemy-0.2.0-amd64.msi) |
+| System            | Download                                                                                                                                      |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Windows 10 64-bit | [PetroAlchemy-0.3.0-beta-amd64.msi](https://github.com/mwentzWW/PetroAlchemy/releases/download/v0.3.0-beta/PetroAlchemy-0.3.0-beta-amd64.msi) |
 
 ## Getting Started
 
-Refer to the current documenation [here](https://petroalchemy.readthedocs.io/en/latest/alpha_tutorial.html) to get started.
+Refer to the current [documenation](https://petroalchemy.readthedocs.io/en/latest/tutorial.html) to get started.
 
 This desktop application was created using [Python](https://www.python.org/) and [Qt](https://www.qt.io/). Performing decline curve analysis and running cash flows is not computationally intensive unless you are running thousands of decline curves, which at that point the code would need to be optimized for speed. As this tool is starting with a focus on analyzing a few wells at a time, Python is ideal for feature development and prototyping. Migrating the source code to the Qt framework has improved the code quality and maintainability.
+
+If you have any issues downloading or installing PetroAlchmey you can reach me at michaelwiv@gmail.com or contact me on [LinkedIn](https://www.linkedin.com/in/mwentzww/).
 
 ## Current Features
 
