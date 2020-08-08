@@ -6,18 +6,20 @@ base = None
 if sys.platform == "win32":
     base = "Win32GUI"
 
-icon = r"icon\\app_colored_bottle.ico"
+icon = r"icon\\app_icon.ico"
 
-version = "0.2.0"
+VERSION = "0.3.0-beta"
 
-executables = [Executable("PetroAlchemy.py", base=base, icon=icon,)]
+executables = [
+    Executable("main.py", base=base, icon=icon, targetName="PetroAlchemy.exe")
+]
 
 # http://msdn.microsoft.com/en-us/library/windows/desktop/aa371847(v=vs.85).aspx
 shortcut_table = [
     (
         "DestopShortcut",
         "DesktopFolder",
-        f"PetroAlchemy {version}",
+        "PetroAlchemy",
         "TARGETDIR",
         "[TARGETDIR]PetroAlchemy.exe",
         None,
@@ -38,30 +40,28 @@ bdist_msi_options = {
 }
 
 PYTHON_INSTALL_DIR = os.path.dirname(os.path.dirname(os.__file__))
-os.environ["TCL_LIBRARY"] = os.path.join(PYTHON_INSTALL_DIR, "tcl", "tcl8.6")
-os.environ["TK_LIBRARY"] = os.path.join(PYTHON_INSTALL_DIR, "tcl", "tk8.6")
 
 include_files = [
-    os.path.join(PYTHON_INSTALL_DIR, "DLLs", "tk86t.dll"),
-    os.path.join(PYTHON_INSTALL_DIR, "DLLs", "tcl86t.dll"),
     r"icon",
+    r"resources",
     r"data_example",
-    r"app_settings.json",
-    r"themes",
+    r"model",
+    r"settings",
+    r"styles",
 ]
 
 setup(
     name="PetroAlchemy",
-    version=version,
+    version=VERSION,
     author="Michael Wentz",
     author_email="michaelwiv@gmail.com",
     url="https://github.com/mwentzWW/PetroAlchemy",
-    python_requires=">=3.7",
     description="Open source desktop application for decline curve and financial analysis",
     options={
         "build_exe": {
-            "packages": ["tkinter", "matplotlib", "mpl_toolkits"],
+            "packages": ["PySide2", "matplotlib", "mpl_toolkits"],
             "include_files": include_files,
+            "excludes": ["matplotlib.tests", "numpy.random._examples"],
         },
         "bdist_msi": bdist_msi_options,
     },

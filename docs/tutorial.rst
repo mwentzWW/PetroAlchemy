@@ -1,23 +1,18 @@
-PetroAlchemy Alpha Tutorial
+PetroAlchemy Tutorial
 ===========================
 .. contents::
 
-.. image:: img/alpha_introduction.gif
+.. image:: img/preview_0.3.0-beta.gif
 
 What is PetroAlchemy?
 ---------------------
 
-PetroAlchemy is a desktop application written using python and tkinter.
+PetroAlchemy is a desktop application written using python for the backend and Qt for the frontend.
 Python is a very popular general purpose coding language. It is used to
 create websites, machine learning models, and data science tools. If you
 would like to learn more I would encourage you to go to
 `python.org <https://www.python.org/>`__ and read the documentation.
-Tkinter is a standard library included with python used to create
-desktop applications, which means it is supported and packaged with
-python instead of a 3rd party. I used tkinter to simplify my code and
-reduce time to launch. Tkinter may not remain as the gui interface
-permanently. There are more advanced gui tools such as Qt, but at the
-moment I am not comfortable enough with the Qt API.
+Qt is a mature Graphical User Interface (GUI) framwork for cross-platform development with Python or C++.
 
 With the basic coding technical introduction aside, PetroAlchemy is
 essentially a tool to import a production file for an oil or gas well
@@ -54,8 +49,7 @@ production.
 How to get PetroAlchemy
 -----------------------
 
-The first release of the package is available in Alpha phase. The
-easiest way to get the software if you are using a Windows 64-bit
+The easiest way to get the latest version if you are using a Windows 64-bit
 machine is to download the Windows installer from the `README 
 <https://github.com/mwentzWW/PetroAlchemy>`__ installation section. If
 you do not know if you are running 32-bit or 64-bit then type *about
@@ -72,7 +66,7 @@ Linux as well. Currently I do not have an easy way to package for mac
 using VirtualBox or other means. If you are interested in helping me
 with that I would appreciate the input.
 
-The alternative from using a Windows or Linux installer would be to
+The alternative from using a Windows installer would be to
 clone the github repository and run the python code yourself if you
 already are comfortable with doing that.
 
@@ -93,16 +87,16 @@ application. You can import multiple wells at once if your file has more than on
 
 Once the application is running you can import your data by clicking the
 **Import Well Data** button on the home page, or by clicking File >
-Import Production. After a successful import the data is available to be
+Import Production, or clicking the icon in the toolbar. After a successful import the data is available to be
 selected as the well for analysis by selecting it using the dropdown box
 on the home page.
 
 How to fit decline curves
 -------------------------
 
-You can select which well to analyze by using the dropdown box on the home page. The current well selected will appear in the status bar in blue at the bottom of the screen. You can also go to the next well by pressing **ctrl+j**, and go to the previous well by pressing **ctrl+f**.
+You can select which well to analyze by using the dropdown box under the toolbar.
 
-The selected well’s production will be shown on the **Production Plot**
+The selected well’s production will be shown on the **Forecasting**
 tab. Click the tab to view the data you just imported. On the left side
 of the screen you will see all of the decline curve parameters for Arps Decline. PetroAlchemy will use either an exponential, hyperbolic, or harmonic decline depending on what *B Factor* is selected. PetroAlchemy will automatically switch to exponential terminal decline based on the *minimim decline* selected. This tool is only useful if you have a reasonable
 understanding of how decline curves are constructed. For a refresher on
@@ -120,16 +114,13 @@ first year of production imported.
 Once your parameters have been filled in for a first look type in a
 special name for the curve linked to the phase you have selected. It
 will save the curve with the default name if you do not provide one.
-Select *Create/Update Decline Curve* to save the curve model based on
+Select *Create New Decline Curve* to save the curve model based on
 the parameters and show it on the plot. Once a curve exists you have four options represented as buttons:
 
-#. **Create/Update Decline Curve:** if a curve already exists and is selected in the **Enter/Select Curve Name** box, this button will update the curve parameters and plot it to the graph
+#. **Create New Decline Curve:** if a curve already exists and is selected this button will update the curve parameters and plot it to the graph
 #. **Remove Decline Curves:** removes the decline curves from the plot, but **does not** delete them. This button is to clear the plot if too many curves are plotted.
-#. **Plot Selected Curve:** this will add the selected curve in the **Enter/Select Curve Name** box to the plot.
-#. **Delete Selected Curve:** this will **delete** the selected curve in the **Enter/Select Curve Name** box from the application.
-
-If you want to modify a curve you have already made instead of making a new curve every time you change the parameters, then select the curve name from the dropdown box, modify any parameters, and select *Create/Update Decline
-Curve* again to update the named curve.
+#. **Plot Decline Curves:** this will add the selected curves in the two comboboxes if the checkboxes are also checked to the plot.
+#. **Delete Decline Curves:** this will **delete** the selected curves in the two comboboxes if the checkboxes are also checked from the application.
 
 .. image:: img/forecast_plot_example.png
 
@@ -137,41 +128,29 @@ How to run financials for a well using decline curves
 -----------------------------------------------------
 
 Once a curve has been saved for an oil and gas phase, a cashflow using
-the forecasts can be created. Select the *Cashflow Inputs* tab to see
+the forecasts can be created. Select the *Cashflow* tab to see
 the economic input options. Any curve saved can be selected to be used
 for the cashflow using the dropdowns. The key inputs for any petroleum
 evaluation cash flow can be entered. If any of the terms are unfamiliar
 look back to the references previously provided.
 
-In this Alpha release the prices, operating expense (OPEX), and capital
+Currently the prices, operating expense (OPEX), and capital
 expense (CAPEX) are static and can not change by month. The prices and
 OPEX will be used for every month’s calculation of income. The CAPEX is
 applied in the first month as one lump sum.
 
 Once you have changed the Cashflow Input parameters however you like,
-select the **Run Financials** button on the bottom right. The Cashflow
-Run Outputs will be filled in with the summary results for a high level
-review of the forecast that was just ran. The current outputs are not
+select the **Create Cashflow** button. The current outputs are not
 any standard, but outputs I would like to see when running a cash flow.
 
 .. image:: img/cashflow_inputs_run_example.png
-
-You can also view the simple text output of the cashflow by month by
-selecting the **Cashflow Output** tab. Currently you cannot group the
-output in the application in any way, by year for example, but that
-could be added if requested.
 
 How to save financial cash flow output
 --------------------------------------
 
 You can save the entire cashflow output run to excel by selecting **File
-> Save Cashflow**. Once exported to excel it is easy to use a pivot
+> Export Cashflow**. Once exported to excel it is easy to use a pivot
 table to change or alter the data in how you would like to see it.
-
-How to get EIA front month futures prices
------------------------------------------
-
-If you want PetroAlchemy to automatically use the WTI and Natural Gas futures front month contract prices, then you need to get a free API key from eia.gov `here <https://www.eia.gov/opendata/register.php/>`__. Once you register and receive an API key from eia.gov, find your **app_settings.json** file which should be in your **PetroAlchemy** folder you installed the program in. Open the json file and replace **EIA_API_KEY** with your API key eia.gov emailed you. Make sure your api key is surrounded by quotes in the json file. Now PetroAlchemy will pull the front month prices and place them as the oil and gas prices on the **Cashflow Input** tab.
 
 Looking forward
 ---------------
@@ -183,9 +162,6 @@ licenses for software used in decline curve analysis. My goal is to
 provide tools through open source that will improve with community
 contributions and feedback. 
 
-Before sharing this project I do not know
-how many people will find this useful, but I want to help foster
-collaboration for open source petroleum engineering tools and projects.
 In my view PetroAlchemy is one of many tools that will be created by the
 petroleum open source community. If you have ideas for PetroAlchemy
 please create a new issue with a feature request on the project’s

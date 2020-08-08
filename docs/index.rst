@@ -5,7 +5,7 @@ Welcome to PetroAlchemy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   alpha_tutorial
+   tutorial
    references
 
 

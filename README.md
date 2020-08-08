@@ -2,11 +2,15 @@
 [![Documentation Status](https://readthedocs.org/projects/petroalchemy/badge/?version=latest)](https://petroalchemy.readthedocs.io/en/latest/?badge=latest)
 [![Latest Version](https://img.shields.io/github/v/release/mwentzWW/PetroAlchemy?include_prereleases)](https://github.com/mwentzWW/PetroAlchemy/releases)
 
-Open source decline curve analysis and financial tool.
+Open source petroleum forecasting and financial tool.
+
+![Preview](./docs/img/preview_0.3.0-beta.gif)
 
 ## Introduction
 
-The PetroAlchemy project grew out of my first attempt to create an open source project for petroleum engineering called petrolpy. The vision is to create an open source desktop application with useful tools for anyone interested in petroleum evaluation. As a reservoir engineer, I wanted to build tools I would actually use. Therefore, the project is beginning with decline curve analysis and estimating cash flows for wells or groups of wells.
+The PetroAlchemy project grew out of my first attempt to create an open source project for petroleum engineering called petrolpy. The vision is to create an open source desktop application with useful tools for anyone interested in petroleum evaluation. As a reservoir engineer, I wanted to build tools I would actually use. Therefore, the project is beginning with decline curve analysis and estimating cash flows for wells or groups of wells. The goal is to balance ease of use and extensibilty for advanced analysis.
+
+PetroAlchemy is free to use and will never require you to purchase a license or pay any fees to use. If you would like to donate to the project you can do so [here](https://paypal.me/MichaelWentz).
 
 ## Installation
 
@@ -14,13 +18,11 @@ The PetroAlchemy project grew out of my first attempt to create an open source p
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Windows 10 64-bit | [PetroAlchemy-0.2.0-amd64.msi](https://github.com/mwentzWW/PetroAlchemy/releases/download/v0.2.0/PetroAlchemy-0.2.0-amd64.msi) |
 
-The project is in the Alpha phase. I wanted to share it now before developing too much further so I can get feedback from fellow engineers on what features and design decisions they would like included. Please try it out and share your thoughts.
-
 ## Getting Started
 
-Refer to the current documenation here to get started [Alpha Release Tutorial](https://petroalchemy.readthedocs.io/en/latest/alpha_tutorial.html).
+Refer to the current documenation [here](https://petroalchemy.readthedocs.io/en/latest/alpha_tutorial.html) to get started.
 
-This desktop application was created using Python and Tkinter. Performing decline curve analysis and running cash flows is not computationally intensive unless you are running thousands of decline curves, which at that point the code would need to be optimized for speed. As this tool is starting with focus on analyzing a few wells at a time, Python is ideal for feature development and prototyping.
+This desktop application was created using [Python](https://www.python.org/) and [Qt](https://www.qt.io/). Performing decline curve analysis and running cash flows is not computationally intensive unless you are running thousands of decline curves, which at that point the code would need to be optimized for speed. As this tool is starting with a focus on analyzing a few wells at a time, Python is ideal for feature development and prototyping. Migrating the source code to the Qt framework has improved the code quality and maintainability.
 
 ## Current Features
 
@@ -32,8 +34,6 @@ This desktop application was created using Python and Tkinter. Performing declin
     5. Output cash flow to excel
 
 I have a list of features to add to the project. I want to add the ability for engineers to select several different kinds of decline curves, not just Arps hyperbolic/exponential. This application utilized the Society of Petroleum Evaluation Engineer's website and best practices for equations and discounting methodologies.
-
-![Alpha Example](./docs/img/alpha_introduction.gif)
 
 ## References
 
