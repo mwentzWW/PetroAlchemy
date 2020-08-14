@@ -25,7 +25,7 @@ Refer to the current [documenation](https://petroalchemy.readthedocs.io/en/lates
 
 This desktop application was created using [Python](https://www.python.org/) and [Qt](https://www.qt.io/). Performing decline curve analysis and running cash flows is not computationally intensive unless you are running thousands of decline curves, which at that point the code would need to be optimized for speed. As this tool is starting with a focus on analyzing a few wells at a time, Python is ideal for feature development and prototyping. Migrating the source code to the Qt framework has improved the code quality and maintainability.
 
-If you have any issues downloading or installing PetroAlchmey you can reach me at michaelwiv@gmail.com or contact me on [LinkedIn](https://www.linkedin.com/in/mwentzww/).
+If you have any issues downloading or installing PetroAlchemy you can reach me at michaelwiv@gmail.com or contact me on [LinkedIn](https://www.linkedin.com/in/mwentzww/).
 
 ## Current Features
 
