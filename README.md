@@ -1,4 +1,5 @@
 # PetroAlchemy
+
 [![Documentation Status](https://readthedocs.org/projects/petroalchemy/badge/?version=latest)](https://petroalchemy.readthedocs.io/en/latest/?badge=latest)
 [![Latest Version](https://img.shields.io/github/v/release/mwentzWW/PetroAlchemy?include_prereleases)](https://github.com/mwentzWW/PetroAlchemy/releases)
 ![Downloads](https://img.shields.io/github/downloads/mwentzWW/PetroAlchemy/total)
@@ -28,7 +29,6 @@ This desktop application was created using [Python](https://www.python.org/) and
 If you have any issues downloading or installing PetroAlchemy you can reach me at michaelwiv@gmail.com or contact me on [LinkedIn](https://www.linkedin.com/in/mwentzww/).
 
 ## Current Features
-
 
     1. Import Excel/CSV production files
     2. Fit Arps decline curves for oil and gas

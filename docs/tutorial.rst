@@ -12,7 +12,7 @@ Python is a very popular general purpose coding language. It is used to
 create websites, machine learning models, and data science tools. If you
 would like to learn more I would encourage you to go to
 `python.org <https://www.python.org/>`__ and read the documentation.
-Qt is a mature Graphical User Interface (GUI) framwork for cross-platform development with Python or C++.
+Qt is a mature Graphical User Interface (GUI) framework for cross-platform development with Python or C++.
 
 With the basic coding technical introduction aside, PetroAlchemy is
 essentially a tool to import a production file for an oil or gas well
