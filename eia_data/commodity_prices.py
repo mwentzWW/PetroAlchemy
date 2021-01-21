@@ -6,18 +6,27 @@ import os
 # Source spot prices from EIA.gov
 # Get EIA_API_KEY here https://www.eia.gov/opendata/register.php
 
-json_file = open(r"settings/user_settings.json", "r")
-json_data = json.loads(json_file.read())
-json_file.close()
 
-api_key = json_data.get("eia_key")
+def get_api_key(file_path=r"settings/user_settings.json"):
+    """ Gets EIA data API key from user setting json file.
+    """
+
+    json_file = open(file_path, "r")
+    json_data = json.loads(json_file.read())
+    json_file.close()
+    api_key = json_data.get("eia_key")
+    return api_key
 
 
-def spot_prices():
+def spot_prices(api_key=None):
     """ Pulls most recent date EIA Spot prices for WTI and Henry Hub Gas from EIA.gov
     
         Returns ($/BBL, $/MMBTU)
     """
+
+    if api_key is None:
+
+        api_key = get_api_key()
 
     wti_spot_link = f"http://api.eia.gov/series/?api_key={api_key}&series_id=PET.RWTC.D"
     henry_hub_spot_link = (
@@ -41,11 +50,15 @@ def spot_prices():
     return (wti_last_spot, hh_last_spot)
 
 
-def futures_prices():
+def futures_prices(api_key=None):
     """ Pulls front month current Nymex prices for WTI and Natural Gas from EIA.gov
     
         Returns ($/BBL, $/MMBTU)
     """
+
+    if api_key is None:
+
+        api_key = get_api_key()
 
     wti_futures_link = (
         f"http://api.eia.gov/series/?api_key={api_key}&series_id=PET.RCLC1.D"
